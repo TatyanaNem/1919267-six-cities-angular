@@ -87,7 +87,7 @@
             </ul>
           </form>
           <div class="cities__places-list places__list tabs__content">@for (offer of offers; track offer.id) {
-            <app-offer-card></app-offer-card>
+            <app-offer-card [offer]="offer"></app-offer-card>
             }
           </div>
         </section>

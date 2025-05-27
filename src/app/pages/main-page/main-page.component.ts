@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { OfferCardComponent } from '../../main-page/components/offer-card/offer-card.component';
 import { Offer } from '../../../types/offer';
+import { OfferCardComponent } from './components/offer-card/offer-card.component';
 
 @Component({
   selector: 'app-main-page',
