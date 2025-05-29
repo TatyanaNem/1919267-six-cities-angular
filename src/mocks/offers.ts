@@ -24,7 +24,7 @@ export const offers: Offer[] = [
     goods: ['Laptop friendly workspace', 'Breakfast', 'Jacuzzi'],
     isFavorite: true,
     isPremium: true,
-    rating: 3.5,
+    rating: 3.7,
     bedrooms: 1,
     description:
       'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
@@ -192,7 +192,7 @@ export const offers: Offer[] = [
     goods: ['Laptop friendly workspace', 'Breakfast', 'Washer'],
     isFavorite: true,
     isPremium: false,
-    rating: 4.1,
+    rating: 4.5,
     bedrooms: 4,
     description:
       'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
