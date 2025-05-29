@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-premium-mark',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   templateUrl: './premium-mark.component.html',
 })
 export class PremiumMarkComponent {
-  block: 'place-card' | 'offer' = 'place-card';
+  @Input() block: 'place-card' | 'offer' = 'place-card';
 }

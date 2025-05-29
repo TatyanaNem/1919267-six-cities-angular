@@ -1,7 +1,7 @@
 <article class="cities__card place-card">
   @if (offer.isPremium){<app-premium-mark></app-premium-mark>}
   <div class="cities__image-wrapper place-card__image-wrapper">
-    <a href="#">
+    <a [routerLink]="['/offer', offer.id]">
       <img class="place-card__image" [src]="offer.previewImage" width="260" height="200" alt={{offer.title}}>
     </a>
   </div>
@@ -12,13 +12,6 @@
         <span class="place-card__price-text">&#47;&nbsp;night</span>
       </div>
       <app-bookmark-button [isFavorite]="offer.isFavorite"></app-bookmark-button>
-      <!-- <button class="place-card__bookmark-button button" [class.place-card__bookmark-button--active]="offer.isFavorite"
-        type="button">
-        <svg class="place-card__bookmark-icon" width="18" height="19">
-          <use xlink:href="#icon-bookmark"></use>
-        </svg>
-        <span class="visually-hidden">{{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}}</span>
-      </button> -->
     </div>
     <div class="place-card__rating rating">
       <div class="place-card__stars rating__stars">
@@ -27,7 +20,7 @@
       </div>
     </div>
     <h2 class="place-card__name">
-      <a href="#">{{offer.title}}</a>
+      <a [routerLink]="['/offer', offer.id]">{{offer.title}}</a>
     </h2>
     <p class="place-card__type">{{offer.type}}</p>
   </div>

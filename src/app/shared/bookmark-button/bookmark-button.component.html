@@ -1,5 +1,5 @@
-@let bookmarkBaseClass = block + '__bookmark-button button';
-<button [class]="isFavorite ? `${bookmarkBaseClass} ${block}__bookmark-button--active` : bookmarkBaseClass"
+<button
+  [class]="isFavorite ? `${block}__bookmark-button button ${block}__bookmark-button--active` : `${block}__bookmark-button button`"
   type="button">
   <svg [class]="block + '__bookmark-icon'" [attr.width]="bookmarkSize[size].width"
     [attr.height]="bookmarkSize[size].height">
