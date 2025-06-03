@@ -1,7 +1,11 @@
 <div class="page page--gray page--main">
   <app-header></app-header>
 
-  <main class="page__main page__main--index">
+  <main [ngClass]="{
+  'page__main': true,
+  'page__main--index': true,
+  'page__main--index-empty': !offers.length
+}">
     <h1 class="visually-hidden">Cities</h1>
     <div class="tabs">
       <section class="locations container">
@@ -39,35 +43,10 @@
         </ul>
       </section>
     </div>
-    <div class="cities">
-      <div class="cities__places-container container">
-        <section class="cities__places places">
-          <h2 class="visually-hidden">Places</h2>
-          <b class="places__found">312 places to stay in Amsterdam</b>
-          <form class="places__sorting" action="#" method="get">
-            <span class="places__sorting-caption">Sort by</span>
-            <span class="places__sorting-type" tabindex="0">
-              Popular
-              <svg class="places__sorting-arrow" width="7" height="4">
-                <use xlink:href="#icon-arrow-select"></use>
-              </svg>
-            </span>
-            <ul class="places__options places__options--custom places__options--opened">
-              <li class="places__option places__option--active" tabindex="0">Popular</li>
-              <li class="places__option" tabindex="0">Price: low to high</li>
-              <li class="places__option" tabindex="0">Price: high to low</li>
-              <li class="places__option" tabindex="0">Top rated first</li>
-            </ul>
-          </form>
-          <div class="cities__places-list places__list tabs__content">@for (offer of offers; track offer.id) {
-            <app-offer-card [offer]="offer"></app-offer-card>
-            }
-          </div>
-        </section>
-        <div class="cities__right-section">
-          <section class="cities__map map"></section>
-        </div>
-      </div>
-    </div>
+    @if (offers.length) {
+    <div class="cities" mainBlock></div>
+    } @else {
+    <div class="cities" mainBlockEmpty></div>
+    }
   </main>
 </div>

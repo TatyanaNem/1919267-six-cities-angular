@@ -1,12 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Offer } from '../../../types/offer';
-import { OfferCardComponent } from './components/offer-card/offer-card.component';
 import { offers } from '../../../mocks/offers';
 import { HeaderComponent } from '../../shared/header/header.component';
+import { MainBlockComponent } from '../../features/main-block/main-block.component';
+import { MainBlockEmptyComponent } from '../../features/main-block-empty/main-block-empty.component';
 
 @Component({
   selector: 'app-main-page',
-  imports: [OfferCardComponent, HeaderComponent],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    MainBlockComponent,
+    MainBlockEmptyComponent,
+  ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css',
 })
