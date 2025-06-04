@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[mainBlockEmpty]',
+  selector: 'app-main-block-empty',
   imports: [],
   templateUrl: './main-block-empty.component.html',
+  styleUrl: './main-block-empty.component.css',
 })
 export class MainBlockEmptyComponent {}

@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { BookmarkButtonComponent } from '../shared/bookmark-button/bookmark-button.component';
-import { PremiumMarkComponent } from '../shared/premium-mark/premium-mark.component';
 import { RouterLink } from '@angular/router';
-import { Size } from '../../types/size';
 import { GetRatingPipe } from './lib/get-rating.pipe';
-import { Offer } from '../../types/offer';
+import { Offer } from '../../../../../types/offer';
+import { Size } from '../../../../../types/size';
+import { BookmarkButtonComponent } from '../../../../shared/bookmark-button/bookmark-button.component';
+import { PremiumMarkComponent } from '../../../../shared/premium-mark/premium-mark.component';
 
 @Component({
   selector: 'app-offer-card',

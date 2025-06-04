@@ -1,11 +1,7 @@
 <div class="page page--gray page--main">
   <app-header></app-header>
 
-  <main [ngClass]="{
-  'page__main': true,
-  'page__main--index': true,
-  'page__main--index-empty': !offers.length
-}">
+  <main [class.page__main--index-empty]="!offers.length" class="page__main page__main--index">
     <h1 class="visually-hidden">Cities</h1>
     <div class="tabs">
       <section class="locations container">
@@ -43,10 +39,18 @@
         </ul>
       </section>
     </div>
-    @if (offers.length) {
-    <div class="cities" mainBlock></div>
-    } @else {
-    <div class="cities" mainBlockEmpty></div>
-    }
+    <div class="cities">
+      <div [class.cities__places-container--empty]="!offers.length" class="cities__places-container container">
+        @if (offers.length) {
+        <app-main-block></app-main-block>
+        <div class="cities__right-section">
+          <section class="cities__map map"></section>
+        </div>
+        } @else {
+        <app-main-block-empty></app-main-block-empty>
+        <div class="cities__right-section"></div>
+        }
+      </div>
+    </div>
   </main>
 </div>
