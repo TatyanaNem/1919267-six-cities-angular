@@ -5,6 +5,7 @@ import { offers } from '../../../mocks/offers';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { MainBlockComponent } from '../../features/main-block/main-block.component';
 import { MainBlockEmptyComponent } from '../../features/main-block-empty/main-block-empty.component';
+import { LocationsComponent } from '../../features/locations/locations.component';
 
 @Component({
   selector: 'app-main-page',
@@ -13,6 +14,7 @@ import { MainBlockEmptyComponent } from '../../features/main-block-empty/main-bl
     HeaderComponent,
     MainBlockComponent,
     MainBlockEmptyComponent,
+    LocationsComponent,
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css',
