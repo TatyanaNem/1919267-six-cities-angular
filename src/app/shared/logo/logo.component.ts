@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Size } from '../../../types/size';
+import { Size } from '../types/size';
 
 @Component({
   selector: 'app-logo',

@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GetRatingPipe } from './lib/get-rating.pipe';
-import { Offer } from '../../../../../types/offer';
-import { Size } from '../../../../../types/size';
+import { Offer } from '../../../../shared/types/offer';
+import { Size } from '../../../../shared/types/size';
 import { BookmarkButtonComponent } from '../../../../shared/bookmark-button/bookmark-button.component';
 import { PremiumMarkComponent } from '../../../../shared/premium-mark/premium-mark.component';
 

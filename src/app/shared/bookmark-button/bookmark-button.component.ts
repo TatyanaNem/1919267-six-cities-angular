@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Size } from '../../../types/size';
+import { Size } from '../types/size';
 import { CommonModule } from '@angular/common';
 
 @Component({

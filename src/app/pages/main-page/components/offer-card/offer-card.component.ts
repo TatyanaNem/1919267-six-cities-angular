@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Offer } from '../../../../../types/offer';
+import { Offer } from '../../../../shared/types/offer';
 import { BookmarkButtonComponent } from '../../../../shared/bookmark-button/bookmark-button.component';
 import { PremiumMarkComponent } from '../../../../shared/premium-mark/premium-mark.component';
 import { RouterLink } from '@angular/router';

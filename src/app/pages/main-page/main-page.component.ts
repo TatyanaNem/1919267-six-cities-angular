@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Offer } from '../../../types/offer';
+import { Offer } from '../../shared/types/offer';
 import { offers } from '../../../mocks/offers';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { MainBlockComponent } from '../../features/main-block/main-block.component';

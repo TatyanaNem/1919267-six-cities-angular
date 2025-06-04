@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Offer } from '../../../types/offer';
+import { Offer } from '../../shared/types/offer';
 import { PluralEndingPipe } from '../../shared/pipes/plural-ending.pipe';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
 

@@ -1,5 +1,5 @@
-import { CityName } from '../types/city';
-import { Offer, OfferType } from '../types/offer';
+import { CityName } from '../app/shared/types/city';
+import { Offer, OfferType } from '../app/shared/types/offer';
 
 export const offers: Offer[] = [
   {
