@@ -1,13 +1,22 @@
-import { Component, Input } from '@angular/core';
-import { OfferCardComponent } from '../../main-page/components/offer-card/offer-card.component';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { Offer } from '../../../types/offer';
+import { offers } from '../../../mocks/offers';
+import { HeaderComponent } from '../../shared/header/header.component';
+import { MainBlockComponent } from '../../features/main-block/main-block.component';
+import { MainBlockEmptyComponent } from '../../features/main-block-empty/main-block-empty.component';
 
 @Component({
   selector: 'app-main-page',
-  imports: [OfferCardComponent],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    MainBlockComponent,
+    MainBlockEmptyComponent,
+  ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css',
 })
 export class MainPageComponent {
-  @Input() offers: Offer[] = [];
+  offers: Offer[] = offers;
 }

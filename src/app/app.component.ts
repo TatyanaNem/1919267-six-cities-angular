@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { MainPageComponent } from './pages/main-page/main-page.component';
-import { offers } from '../mocks/offers';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-root',
-  imports: [MainPageComponent],
-  template: ` <app-main-page [offers]="offers"></app-main-page>`,
+  imports: [RouterModule],
+  template: `<router-outlet></router-outlet>`,
 })
-export class AppComponent {
-  offers = offers;
-}
+export class AppComponent {}
