@@ -3,7 +3,7 @@ import { Offer } from '../../../../../types/offer';
 import { BookmarkButtonComponent } from '../../../../shared/bookmark-button/bookmark-button.component';
 import { PremiumMarkComponent } from '../../../../shared/premium-mark/premium-mark.component';
 import { RouterLink } from '@angular/router';
-import { GetRatingPipe } from '../../../../pipes/get-rating.pipe';
+import { GetRatingPipe } from '../../../../shared/pipes/get-rating.pipe';
 
 @Component({
   selector: 'app-offer-card',
