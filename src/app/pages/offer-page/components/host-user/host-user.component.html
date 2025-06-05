@@ -1,0 +1,13 @@
+<div class="offer__host-user user">
+  <div class="offer__avatar-wrapper user__avatar-wrapper" [class.offer__avatar-wrapper--pro]="hostUser.isPro">
+    <img class="offer__avatar user__avatar" [src]="hostUser.avatarUrl" width="74" height="74" [alt]="hostUser.name">
+  </div>
+  <span class="offer__user-name">
+    {{hostUser.name}}
+  </span>
+  @if (hostUser.isPro) {
+  <span class="offer__user-status">
+    Pro
+  </span>
+  }
+</div>

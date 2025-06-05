@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 export class BookmarkButtonComponent {
   @Input() block: 'place-card' | 'offer' = 'place-card';
   @Input() size: keyof Size = 'small';
-  @Input() isFavorite = false;
+  @Input() isFavorite!: boolean;
 
   public readonly bookmarkSize: Size = {
     small: { width: '18', height: '19' },

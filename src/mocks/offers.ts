@@ -43,7 +43,7 @@ export const offers: Offer[] = [
   {
     id: '4da58b5e-1a67-40f0-b998-2af668bbdfc8',
     title: 'Penthouse, 4-5 rooms + 5 balconies',
-    type: OfferType.Room,
+    type: OfferType.Apartment,
     price: 243,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
     city: {
@@ -76,7 +76,7 @@ export const offers: Offer[] = [
       'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
     ],
-    maxAdults: 2,
+    maxAdults: 1,
   },
   {
     id: '9a374ac2-2af3-4c70-9f8d-a7ccbaa4de1c',

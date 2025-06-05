@@ -1,5 +1,5 @@
-import { Host } from '@angular/core';
 import { City } from './city';
+import { Host } from './host';
 import { Location } from './location';
 
 export enum OfferType {
