@@ -11,4 +11,15 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
 })
 export class MainBlockComponent {
   @Input() offers: Offer[] = [];
+  currentOfferId: string | null = null;
+
+  onMouseOnCard(id: string) {
+    this.currentOfferId = id;
+    console.log(this.currentOfferId);
+  }
+
+  onMouseLeaveCard() {
+    this.currentOfferId = null;
+    console.log(this.currentOfferId);
+  }
 }

@@ -18,7 +18,8 @@
   </form>
   <div class="cities__places-list places__list tabs__content">
     @for (offer of offers; track offer.id) {
-    <app-offer-card [offer]="offer"></app-offer-card>
+    <app-offer-card [offer]="offer" (mouseenter)="onMouseOnCard(offer.id)"
+      (mouseleave)="onMouseLeaveCard()"></app-offer-card>
     }
   </div>
 </section>
