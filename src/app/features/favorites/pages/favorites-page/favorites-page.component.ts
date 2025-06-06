@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Offer } from '../../../../shared/types/offer';
 import { offers } from '../../../../../mocks/offers';
-import { OfferCardComponent } from '../../../../shared/offer-card/offer-card.component';
+import { OfferCardComponent } from '../../../../shared/components/offer-card/offer-card.component';
 import { LayoutComponent } from '../../../../core/layout/layout/layout.component';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Offer } from '../../../../shared/types/offer';
 import { PluralEndingPipe } from '../../../../shared/pipes/plural-ending.pipe';
-import { OfferCardComponent } from '../../../../shared/offer-card/offer-card.component';
+import { OfferCardComponent } from '../../../../shared/components/offer-card/offer-card.component';
 
 @Component({
   selector: 'app-main-block',

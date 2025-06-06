@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BookmarkButtonComponent } from '../../../../shared/bookmark-button/bookmark-button.component';
-import { PremiumMarkComponent } from '../../../../shared/premium-mark/premium-mark.component';
+import { BookmarkButtonComponent } from '../../../../shared/components/bookmark-button/bookmark-button.component';
+import { PremiumMarkComponent } from '../../../../shared/components/premium-mark/premium-mark.component';
 import { ActivatedRoute } from '@angular/router';
 import { Offer } from '../../../../shared/types/offer';
 import { offers } from '../../../../../mocks/offers';

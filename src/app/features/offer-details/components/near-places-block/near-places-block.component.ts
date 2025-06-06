@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OfferCardComponent } from '../../../../shared/offer-card/offer-card.component';
+import { OfferCardComponent } from '../../../../shared/components/offer-card/offer-card.component';
 import { Offer } from '../../../../shared/types/offer';
 import { offers } from '../../../../../mocks/offers';
 

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Size } from '../types/size';
 import { CommonModule } from '@angular/common';
+import { Size } from '../../types/size';
 
 @Component({
   selector: 'app-bookmark-button',
