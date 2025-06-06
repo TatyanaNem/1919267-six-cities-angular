@@ -47,7 +47,7 @@ export const offers: Offer[] = [
     price: 243,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
     city: {
-      name: CityName.Paris,
+      name: CityName.Brussels,
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -60,7 +60,7 @@ export const offers: Offer[] = [
       zoom: 16,
     },
     goods: ['Laptop friendly workspace', 'Breakfast', 'Washer'],
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 4.1,
     bedrooms: 1,
