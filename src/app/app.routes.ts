@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { MainPageComponent } from './pages/main-page/main-page.component';
-import { authGuard } from './guards/auth.guard';
+import { MainPageComponent } from './features/main/pages/main-page/main-page.component';
+import { authGuard } from './core/auth/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -11,24 +11,24 @@ export const routes: Routes = [
   {
     path: 'offer/:offerId',
     loadComponent: () =>
-      import('./pages/offer-page/offer-page.component').then(
-        (c) => c.OfferPageComponent
-      ),
+      import(
+        './features/offer-details/pages/offer-details-page/offer-details-page.component'
+      ).then((c) => c.OfferPageComponent),
     title: 'Offer page',
   },
   {
     path: 'favorites',
     loadComponent: () =>
-      import('./pages/favorites-page/favorites-page.component').then(
-        (c) => c.FavoritesPageComponent
-      ),
+      import(
+        './features/favorites/pages/favorites-page/favorites-page.component'
+      ).then((c) => c.FavoritesPageComponent),
     title: 'Favorites page',
     canActivate: [authGuard],
   },
   {
     path: 'login',
     loadComponent: () =>
-      import('./pages/login-page/login-page.component').then(
+      import('./core/auth/pages/login-page/login-page.component').then(
         (c) => c.LoginPageComponent
       ),
     title: 'Login page',
@@ -36,9 +36,9 @@ export const routes: Routes = [
   {
     path: '**',
     loadComponent: () =>
-      import('./pages/not-found-page/not-found-page.component').then(
-        (c) => c.NotFoundPageComponent
-      ),
+      import(
+        './features/errors/pages/not-found-page/not-found-page.component'
+      ).then((c) => c.NotFoundPageComponent),
     title: 'Not found page',
   },
 ];

@@ -1,0 +1,7 @@
+<div [ngClass]="getCurrentRouteClass(currentUrl)">
+  <app-header></app-header>
+  <ng-content></ng-content>
+  @if (currentUrl === '/favorites') {
+  <app-footer></app-footer>
+  }
+</div>

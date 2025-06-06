@@ -1,0 +1,30 @@
+<app-layout>
+
+  <main class="page__main page__main--favorites">
+    <div class="page__favorites-container container">
+      <section class="favorites">
+        <h1 class="favorites__title">Saved listing</h1>
+        <ul class="favorites__list">
+          @for (offer of favoriteOffers; track offer) {
+          <li class="favorites__locations-items">
+            <div class="favorites__locations locations locations--current">
+              <div class="locations__item">
+                <a class="locations__item-link" href="#">
+                  <span>{{offer[0]}}</span>
+                </a>
+              </div>
+            </div>
+            <div class="favorites__places">
+              @for (offerItem of offer[1]; let i = $index; track offerItem.id) {
+              <app-offer-card [offer]="offerItem" [block]="'favorites'" [size]="'small'"
+                [class.favorites__card.marginBottom.px]="i === offer[1].length - 1 ? 0 : 32"></app-offer-card>
+              }
+            </div>
+          </li>
+          }
+        </ul>
+      </section>
+    </div>
+  </main>
+
+</app-layout>

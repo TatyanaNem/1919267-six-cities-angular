@@ -1,0 +1,9 @@
+<div class="offer__gallery-container container">
+  <div class="offer__gallery">
+    @for (image of offerImages; track image) {
+    <div class="offer__image-wrapper">
+      <img class="offer__image" [src]="image" alt="Photo studio">
+    </div>
+    }
+  </div>
+</div>
