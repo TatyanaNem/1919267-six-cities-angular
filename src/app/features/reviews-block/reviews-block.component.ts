@@ -1,10 +1,11 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Review } from './types/review.type';
 import { ReviewItemComponent } from './components/review-item/review-item.component';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
 
 @Component({
   selector: 'app-reviews-block',
-  imports: [ReviewItemComponent],
+  imports: [ReviewItemComponent, ReviewFormComponent],
   templateUrl: './reviews-block.component.html',
   styleUrl: './reviews-block.component.css',
 })

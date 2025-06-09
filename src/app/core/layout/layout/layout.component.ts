@@ -19,7 +19,6 @@ export class LayoutComponent {
   }
 
   getCurrentRouteClass(url: string): string {
-    console.log(url);
     switch (url) {
       case '/':
         return 'page page--gray page--main';

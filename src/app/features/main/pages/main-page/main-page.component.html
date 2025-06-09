@@ -5,17 +5,21 @@
     <app-tabs></app-tabs>
     <div class="cities">
       <div [class.cities__places-container--empty]="!offers.length" class="cities__places-container container">
-        @if (offers.length) {
-        <app-main-block [offers]="offers"></app-main-block>
-        <div class="cities__right-section">
-          <section class="cities__map map"></section>
-        </div>
-        } @else {
-        <app-main-block-empty></app-main-block-empty>
-        <div class="cities__right-section"></div>
-        }
+
+        <ng-container *ngIf="offers.length; else empty">
+          <app-main-block [offers]="offers"></app-main-block>
+          <div class="cities__right-section">
+            <section class="cities__map map"></section>
+          </div>
+        </ng-container>
+
       </div>
     </div>
   </main>
 
 </app-layout>
+
+<ng-template #empty>
+  <app-main-block-empty></app-main-block-empty>
+  <div class="cities__right-section"></div>
+</ng-template>
