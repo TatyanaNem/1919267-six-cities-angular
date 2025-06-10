@@ -8,10 +8,12 @@ import { GetRatingPipe } from '../../../../shared/pipes/get-rating.pipe';
 import { PluralEndingPipe } from '../../../../shared/pipes/plural-ending.pipe';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { HostUserComponent } from './components/host-user/host-user.component';
-import { ReviewsBlockComponent } from '../../components/reviews-block/reviews-block.component';
+import { ReviewsBlockComponent } from '../../../reviews-block/reviews-block.component';
 import { OfferGalleryComponent } from './components/offer-gallery/offer-gallery.component';
 import { LayoutComponent } from '../../../../core/layout/layout/layout.component';
 import { NearPlacesBlockComponent } from '../../components/near-places-block/near-places-block.component';
+import { Review } from '../../../reviews-block/types/review.type';
+import { reviews } from '../../../../../mocks/reviews';
 
 @Component({
   selector: 'app-offer-page',
@@ -34,6 +36,7 @@ export class OfferPageComponent implements OnInit {
   offerId = '';
   currentOffer: Offer | undefined;
   offers: Offer[] = offers;
+  reviews: Review[] = reviews;
 
   constructor(private route: ActivatedRoute) {}
 
