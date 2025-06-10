@@ -25,8 +25,5 @@ export class ReviewFormComponent {
 
   onSubmit() {
     this.reviewFormData = this.form?.value;
-    if (this.form?.submitted) {
-      this.form.reset();
-    }
   }
 }

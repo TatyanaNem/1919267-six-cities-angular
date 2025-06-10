@@ -19,6 +19,7 @@
       To submit review please make sure to set <span class="reviews__star">rating</span> and describe your
       stay with at least <b class="reviews__text-amount">50 characters</b>.
     </p>
-    <button class="reviews__submit form__submit button" type="submit" [disabled]="!reviewForm.valid">Submit</button>
+    <button class="reviews__submit form__submit button" type="submit" [disabled]="!reviewForm.valid"
+      (click)="reviewForm.reset({rating: 0, review: ''})">Submit</button>
   </div>
 </form>
