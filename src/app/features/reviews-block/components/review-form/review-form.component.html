@@ -1,7 +1,7 @@
 <form class="reviews__form form" action="#" method="post" (ngSubmit)="onSubmit()" #reviewForm="ngForm">
   <label class="reviews__label form__label" for="review">Your review</label>
   <div class="reviews__rating-form form__rating">
-    @for (item of ratingArray; track item) {
+    @for (item of ratingMap; track item.value) {
     <input class="form__rating-input visually-hidden" name="rating" [value]="item.value" [id]="`${item.value}-stars`"
       type="radio" ngModel required>
     <label [for]="`${item.value}-stars`" class="reviews__rating-label form__rating-label" [title]="item.title">

@@ -15,7 +15,7 @@ export class ReviewFormComponent {
     review: '',
   };
 
-  readonly ratingArray = [
+  readonly ratingMap = [
     { title: 'perfect', value: 5 },
     { title: 'good', value: 4 },
     { title: 'not bad', value: 3 },

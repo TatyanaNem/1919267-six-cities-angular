@@ -6,7 +6,7 @@
     <div class="cities">
       <div [class.cities__places-container--empty]="!offers.length" class="cities__places-container container">
 
-        <ng-container *ngIf="offers.length; else empty">
+        <ng-container *ngIf="offers.length > 0; else empty">
           <app-main-block [offers]="offers"></app-main-block>
           <div class="cities__right-section">
             <section class="cities__map map"></section>
