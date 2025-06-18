@@ -14,6 +14,7 @@ import { LayoutComponent } from '../../../../core/layout/layout/layout.component
 import { NearPlacesBlockComponent } from '../../components/near-places-block/near-places-block.component';
 import { Review } from '../../../reviews-block/types/review.type';
 import { reviews } from '../../../../../mocks/reviews';
+import { MapComponent } from '../../../../shared/components/map/map.component';
 
 @Component({
   selector: 'app-offer-page',
@@ -29,8 +30,10 @@ import { reviews } from '../../../../../mocks/reviews';
     ReviewsBlockComponent,
     OfferGalleryComponent,
     NearPlacesBlockComponent,
+    MapComponent,
   ],
   templateUrl: './offer-details-page.component.html',
+  styleUrl: './offer-details-page.component.css',
 })
 export class OfferPageComponent implements OnInit {
   offerId = '';

@@ -9,7 +9,7 @@
         <ng-container *ngIf="offers.length > 0; else empty">
           <app-main-block [offers]="offers"></app-main-block>
           <div class="cities__right-section">
-            <section class="cities__map map"></section>
+            <app-map></app-map>
           </div>
         </ng-container>
 
