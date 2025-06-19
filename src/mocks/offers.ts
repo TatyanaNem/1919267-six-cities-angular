@@ -1,4 +1,4 @@
-import { CityName } from '../app/shared/types/city';
+import { Cities } from '../app/shared/enums/cities.enum';
 import { Offer, OfferType } from '../app/shared/types/offer';
 
 export const offers: Offer[] = [
@@ -9,16 +9,16 @@ export const offers: Offer[] = [
     price: 202,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/8.jpg',
     city: {
-      name: CityName.Brussels,
+      name: Cities.Amsterdam,
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.35454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.868610000000004,
-      longitude: 2.342499,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 16,
     },
     goods: ['Laptop friendly workspace', 'Breakfast', 'Jacuzzi'],
@@ -47,16 +47,16 @@ export const offers: Offer[] = [
     price: 243,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
     city: {
-      name: CityName.Brussels,
+      name: Cities.Amsterdam,
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.35454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.858610000000006,
-      longitude: 2.330499,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 16,
     },
     goods: ['Laptop friendly workspace', 'Breakfast', 'Washer'],
@@ -85,16 +85,16 @@ export const offers: Offer[] = [
     price: 354,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
     city: {
-      name: CityName.Paris,
+      name: Cities.Amsterdam,
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.35454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.834610000000005,
-      longitude: 2.335499,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 16,
     },
     goods: [
@@ -134,16 +134,16 @@ export const offers: Offer[] = [
     price: 196,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
     city: {
-      name: CityName.Paris,
+      name: Cities.Amsterdam,
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.35454,
+        longitude: 4.897976,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.85761,
-      longitude: 2.358499,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 16,
     },
     goods: [
@@ -170,46 +170,46 @@ export const offers: Offer[] = [
     ],
     maxAdults: 4,
   },
-  {
-    id: '4da58b5e-1a67-40f0-b998-2af668bsssdfc8',
-    title: 'Penthouse, 4-5 rooms + 5 balconies',
-    type: OfferType.House,
-    price: 1111,
-    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
-    city: {
-      name: CityName.Paris,
-      location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13,
-      },
-    },
-    location: {
-      latitude: 48.858610000000006,
-      longitude: 2.330499,
-      zoom: 16,
-    },
-    goods: ['Laptop friendly workspace', 'Breakfast', 'Washer'],
-    isFavorite: true,
-    isPremium: false,
-    rating: 4.5,
-    bedrooms: 4,
-    description:
-      'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
-    host: {
-      id: 36,
-      name: 'Max',
-      isPro: false,
-      avatarUrl: 'img/avatar-max.jpg',
-    },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/8.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
-    ],
-    maxAdults: 8,
-  },
+  // {
+  //   id: '4da58b5e-1a67-40f0-b998-2af668bsssdfc8',
+  //   title: 'Penthouse, 4-5 rooms + 5 balconies',
+  //   type: OfferType.House,
+  //   price: 1111,
+  //   previewImage: 'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
+  //   city: {
+  //     name: Cities.Paris,
+  //     location: {
+  //       latitude: 48.85661,
+  //       longitude: 2.351499,
+  //       zoom: 13,
+  //     },
+  //   },
+  //   location: {
+  //     latitude: 48.858610000000006,
+  //     longitude: 2.330499,
+  //     zoom: 16,
+  //   },
+  //   goods: ['Laptop friendly workspace', 'Breakfast', 'Washer'],
+  //   isFavorite: true,
+  //   isPremium: false,
+  //   rating: 4.5,
+  //   bedrooms: 4,
+  //   description:
+  //     'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
+  //   host: {
+  //     id: 36,
+  //     name: 'Max',
+  //     isPro: false,
+  //     avatarUrl: 'img/avatar-max.jpg',
+  //   },
+  //   images: [
+  //     'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
+  //     'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+  //     'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
+  //     'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+  //     'https://15.design.htmlacademy.pro/static/hotel/8.jpg',
+  //     'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
+  //   ],
+  //   maxAdults: 8,
+  // },
 ];

@@ -6,6 +6,9 @@ import { LayoutComponent } from '../../../../core/layout/layout/layout.component
 import { TabsComponent } from '../../components/tabs/tabs.component';
 import { MainBlockEmptyComponent } from '../../components/main-block-empty/main-block-empty.component';
 import { MainBlockComponent } from '../../components/main-block/main-block.component';
+import { MapComponent } from '../../../../shared/components/map/map.component';
+import { City } from '../../../../shared/types/city';
+import { CityMap } from '../../../../shared/constants';
 
 @Component({
   selector: 'app-main-page',
@@ -15,10 +18,21 @@ import { MainBlockComponent } from '../../components/main-block/main-block.compo
     TabsComponent,
     MainBlockComponent,
     MainBlockEmptyComponent,
+    MapComponent,
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css',
 })
 export class MainPageComponent {
   offers: Offer[] = offers;
+  currentCity: City = CityMap.Amsterdam;
+  hoveredOfferId: string | null = null;
+
+  setCurrentCity(city: City) {
+    this.currentCity = city;
+  }
+
+  setActiveId(id: string | null) {
+    this.hoveredOfferId = id;
+  }
 }
