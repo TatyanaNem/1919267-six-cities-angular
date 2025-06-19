@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Cities } from '../../../../shared/enums/cities.enum';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CityMap } from '../../../../shared/constants';
+import { City } from '../../../../shared/types/city';
 
 @Component({
   selector: 'app-tabs',
@@ -8,10 +9,11 @@ import { Cities } from '../../../../shared/enums/cities.enum';
   styleUrl: './tabs.component.css',
 })
 export class TabsComponent {
-  cities = Object.values(Cities);
-  selectedCity: string = Cities.Paris;
+  @Input() currentCity: City = CityMap.Paris;
+  @Output() changeCity = new EventEmitter<City>();
+  cities = Object.values(CityMap);
 
-  onSelectCity(city: string) {
-    this.selectedCity = city;
+  onSelectCity(city: City) {
+    this.changeCity.emit(city);
   }
 }

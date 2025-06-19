@@ -44,12 +44,8 @@ export class OfferPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.offerId = this.route.snapshot.paramMap.get('offerId') || '';
+    this.offerId = this.route.snapshot.paramMap.get('offerId') ?? '';
 
-    if (this.offerId) {
-      this.currentOffer = this.offers.find(
-        (offer) => offer.id === this.offerId
-      );
-    }
+    this.currentOffer = this.offers.find((offer) => offer.id === this.offerId);
   }
 }
