@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Offer } from '../../../../shared/types/offer';
 import { PluralEndingPipe } from '../../../../shared/pipes/plural-ending.pipe';
 import { OfferCardComponent } from '../../../../shared/components/offer-card/offer-card.component';
@@ -11,13 +11,13 @@ import { OfferCardComponent } from '../../../../shared/components/offer-card/off
 })
 export class MainBlockComponent {
   @Input() offers: Offer[] = [];
-  currentOfferId: string | null = null;
+  @Output() changeActiveId = new EventEmitter<string | null>();
 
   onMouseOnCard(id: string) {
-    this.currentOfferId = id;
+    this.changeActiveId.emit(id);
   }
 
   onMouseLeaveCard() {
-    this.currentOfferId = null;
+    this.changeActiveId.emit(null);
   }
 }

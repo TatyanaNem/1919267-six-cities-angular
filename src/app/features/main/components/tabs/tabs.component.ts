@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cities } from '../../../../shared/enums/cities.enum';
 
 @Component({
@@ -8,10 +8,11 @@ import { Cities } from '../../../../shared/enums/cities.enum';
   styleUrl: './tabs.component.css',
 })
 export class TabsComponent {
+  @Input() currentCity = Cities.Paris;
+  @Output() changeCity = new EventEmitter<Cities>();
   cities = Object.values(Cities);
-  selectedCity: string = Cities.Paris;
 
-  onSelectCity(city: string) {
-    this.selectedCity = city;
+  onSelectCity(city: Cities) {
+    this.changeCity.emit(city);
   }
 }

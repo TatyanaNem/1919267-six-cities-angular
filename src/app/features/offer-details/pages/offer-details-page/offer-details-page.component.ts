@@ -14,6 +14,7 @@ import { LayoutComponent } from '../../../../core/layout/layout/layout.component
 import { NearPlacesBlockComponent } from '../../components/near-places-block/near-places-block.component';
 import { Review } from '../../../reviews-block/types/review.type';
 import { reviews } from '../../../../../mocks/reviews';
+import { MapComponent } from '../../../../shared/components/map/map.component';
 
 @Component({
   selector: 'app-offer-page',
@@ -29,6 +30,7 @@ import { reviews } from '../../../../../mocks/reviews';
     ReviewsBlockComponent,
     OfferGalleryComponent,
     NearPlacesBlockComponent,
+    MapComponent,
   ],
   templateUrl: './offer-details-page.component.html',
 })
@@ -41,12 +43,8 @@ export class OfferPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.offerId = this.route.snapshot.paramMap.get('offerId') || '';
+    this.offerId = this.route.snapshot.paramMap.get('offerId') ?? '';
 
-    if (this.offerId) {
-      this.currentOffer = this.offers.find(
-        (offer) => offer.id === this.offerId
-      );
-    }
+    this.currentOffer = this.offers.find((offer) => offer.id === this.offerId);
   }
 }

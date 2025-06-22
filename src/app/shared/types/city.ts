@@ -1,15 +1,7 @@
+import { Cities } from '../enums/cities.enum';
 import { Location } from './location';
 
-export enum CityName {
-  Paris = 'Paris',
-  Cologne = 'Cologne',
-  Brussels = 'Brussels',
-  Amsterdam = 'Amsterdam',
-  Hamburg = 'Hamburg',
-  Dusseldorf = 'Dusseldorf',
-}
-
 export interface City {
-  name: (typeof CityName)[keyof typeof CityName];
+  name: Cities;
   location: Location;
 }
