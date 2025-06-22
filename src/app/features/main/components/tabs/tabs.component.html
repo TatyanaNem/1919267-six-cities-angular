@@ -1,11 +1,11 @@
 <div class="tabs">
   <section class="locations container">
     <ul class="locations__list tabs__list">
-      @for (city of cities; track city.name) {
+      @for (city of cities; track city) {
       <li class="locations__item">
-        <a class="locations__item-link tabs__item" [class.tabs__item--active]="city.name === currentCity.name"
+        <a class="locations__item-link tabs__item" [class.tabs__item--active]="city === currentCity"
           (click)="onSelectCity(city)" (keyup.enter)="onSelectCity(city)" tabindex="0">
-          <span>{{city.name}}</span>
+          <span>{{city}}</span>
         </a>
       </li>
       }

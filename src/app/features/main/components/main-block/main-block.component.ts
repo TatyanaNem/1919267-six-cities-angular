@@ -11,13 +11,13 @@ import { OfferCardComponent } from '../../../../shared/components/offer-card/off
 })
 export class MainBlockComponent {
   @Input() offers: Offer[] = [];
-  @Output() setActiveId = new EventEmitter<string | null>();
+  @Output() changeActiveId = new EventEmitter<string | null>();
 
   onMouseOnCard(id: string) {
-    this.setActiveId.emit(id);
+    this.changeActiveId.emit(id);
   }
 
   onMouseLeaveCard() {
-    this.setActiveId.emit(null);
+    this.changeActiveId.emit(null);
   }
 }

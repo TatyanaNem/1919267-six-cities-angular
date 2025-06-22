@@ -58,8 +58,7 @@
           <app-reviews-block [reviews]="reviews"></app-reviews-block>
         </div>
       </div>
-      <app-map block="offer" [offers]="offers" class="offer-map" [city]="currentOffer.city"
-        [hoveredOfferId]="currentOffer.id">
+      <app-map block="offer" [offers]="offers" [city]="currentOffer.city.location" [activeOfferId]="currentOffer.id">
       </app-map>
     </section>
     <div class="container">

@@ -33,7 +33,6 @@ import { MapComponent } from '../../../../shared/components/map/map.component';
     MapComponent,
   ],
   templateUrl: './offer-details-page.component.html',
-  styleUrl: './offer-details-page.component.css',
 })
 export class OfferPageComponent implements OnInit {
   offerId = '';

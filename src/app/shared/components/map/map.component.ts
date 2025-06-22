@@ -7,9 +7,9 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import * as L from 'leaflet';
-import { City } from '../../types/city';
 import { CityMap } from '../../constants';
 import { Offer } from '../../types/offer';
+import { Cities } from '../../enums/cities.enum';
 
 const defaultCustomIcon = L.icon({
   iconUrl: 'img/pin.svg',
@@ -30,16 +30,37 @@ const currentCustomIcon = L.icon({
 })
 export class MapComponent implements AfterViewInit, OnChanges {
   @Input() block: 'cities' | 'offer' = 'cities';
-  @Input() city: City = CityMap.Amsterdam;
+  @Input() city = CityMap[Cities.Amsterdam];
   @Input() offers: Offer[] = [];
-  @Input() hoveredOfferId: string | null = null;
+  @Input() activeOfferId: string | null = null;
+
+  ngAfterViewInit(): void {
+    this.initMap();
+    this.addMarkers();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('city' in changes && this.map) {
+      this.map.flyTo(
+        [this.city.latitude, this.city.longitude],
+        this.city.zoom,
+        { duration: 1, easeLinearity: 1 }
+      );
+      this.removeMarkers();
+      this.addMarkers();
+    }
+
+    if ('activeOfferId' in changes && this.map) {
+      this.addMarkers();
+    }
+  }
 
   private map: L.Map | null = null;
   private markerLayer: L.LayerGroup<L.Marker> | null = null;
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [this.city.location.latitude, this.city.location.longitude],
+      center: [this.city.latitude, this.city.longitude],
 
       zoom: 12,
     });
@@ -55,8 +76,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
     tiles.addTo(this.map);
   }
 
-  private addMarkers(map: L.Map): void {
-    this.markerLayer = L.layerGroup().addTo(map);
+  private addMarkers(): void {
+    if (this.map) {
+      this.markerLayer = L.layerGroup().addTo(this.map);
+    }
 
     this.offers.forEach((point) => {
       const marker = L.marker(
@@ -66,7 +89,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         },
         {
           icon:
-            point.id === this.hoveredOfferId
+            point.id === this.activeOfferId
               ? currentCustomIcon
               : defaultCustomIcon,
         }
@@ -76,36 +99,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
   }
 
-  private moveToCity(map: L.Map) {
-    map.flyTo(
-      [this.city.location.latitude, this.city.location.longitude],
-      this.city.location.zoom,
-      { duration: 1, easeLinearity: 1 }
-    );
-  }
-
   private removeMarkers() {
     if (this.markerLayer !== null) {
-      this.markerLayer.clearLayers(); // очистка группы
-    }
-  }
-
-  ngAfterViewInit(): void {
-    this.initMap();
-    if (this.map) {
-      this.addMarkers(this.map);
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('city' in changes && this.map) {
-      this.moveToCity(this.map);
-      this.removeMarkers();
-      this.addMarkers(this.map);
-    }
-
-    if ('hoveredOfferId' in changes && this.map) {
-      this.addMarkers(this.map);
+      this.markerLayer.clearLayers();
     }
   }
 }

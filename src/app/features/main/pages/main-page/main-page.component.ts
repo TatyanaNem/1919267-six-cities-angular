@@ -1,3 +1,4 @@
+import { Cities } from './../../../../shared/enums/cities.enum';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Offer } from '../../../../shared/types/offer';
@@ -7,7 +8,6 @@ import { TabsComponent } from '../../components/tabs/tabs.component';
 import { MainBlockEmptyComponent } from '../../components/main-block-empty/main-block-empty.component';
 import { MainBlockComponent } from '../../components/main-block/main-block.component';
 import { MapComponent } from '../../../../shared/components/map/map.component';
-import { City } from '../../../../shared/types/city';
 import { CityMap } from '../../../../shared/constants';
 
 @Component({
@@ -21,18 +21,19 @@ import { CityMap } from '../../../../shared/constants';
     MapComponent,
   ],
   templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.css',
 })
 export class MainPageComponent {
   offers: Offer[] = offers;
-  currentCity: City = CityMap.Amsterdam;
-  hoveredOfferId: string | null = null;
+  currentCity = Cities.Amsterdam;
+  cityForMap = CityMap[this.currentCity];
+  activeOfferId: string | null = null;
 
-  setCurrentCity(city: City) {
+  onChangeCurrentCity(city: Cities) {
     this.currentCity = city;
+    this.cityForMap = CityMap[this.currentCity];
   }
 
-  setActiveId(id: string | null) {
-    this.hoveredOfferId = id;
+  onChangeActiveId(id: string | null) {
+    this.activeOfferId = id;
   }
 }
