@@ -28,9 +28,9 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./core/auth/pages/login-page/login-page.component').then(
-        (c) => c.LoginPageComponent
-      ),
+      import(
+        './features/login-form/pages/login-page/login-page.component'
+      ).then((c) => c.LoginPageComponent),
     title: 'Login page',
   },
   {

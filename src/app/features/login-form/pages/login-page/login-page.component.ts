@@ -1,5 +1,5 @@
+import { LayoutComponent } from './../../../../core/layout/layout/layout.component';
 import { Component } from '@angular/core';
-import { LayoutComponent } from '../../../layout/layout/layout.component';
 import { LoginFormComponent } from '../../../../features/login-form/login-form.component';
 
 @Component({
