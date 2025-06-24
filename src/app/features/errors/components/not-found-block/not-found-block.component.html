@@ -1,0 +1,11 @@
+<main class="page page--favorites-empty container">
+  <h1 class="visually-hidden">6 Cities: 404 {{type | titlecase}} is not found</h1>
+  <section class="page__favorites-container container">
+    <div class="favorites__status-wrapper">
+      <b class="favorites__status">{{pageContentVariants[type]}}</b>
+      <a [routerLink]="['/']" class="link">
+        Go back to main page
+      </a>
+    </div>
+  </section>
+</main>

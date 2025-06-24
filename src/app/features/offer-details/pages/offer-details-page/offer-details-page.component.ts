@@ -15,6 +15,7 @@ import { NearPlacesBlockComponent } from '../../components/near-places-block/nea
 import { Review } from '../../../reviews-block/types/review.type';
 import { reviews } from '../../../../../mocks/reviews';
 import { MapComponent } from '../../../../shared/components/map/map.component';
+import { NotFoundBlockComponent } from '../../../errors/components/not-found-block/not-found-block.component';
 
 @Component({
   selector: 'app-offer-page',
@@ -31,6 +32,7 @@ import { MapComponent } from '../../../../shared/components/map/map.component';
     OfferGalleryComponent,
     NearPlacesBlockComponent,
     MapComponent,
+    NotFoundBlockComponent,
   ],
   templateUrl: './offer-details-page.component.html',
 })

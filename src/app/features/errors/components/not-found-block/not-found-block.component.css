@@ -1,8 +1,9 @@
 .link {
   display: block;
   width: max-content;
-  margin: 30px auto;
-  font-size: 20px;
+  margin: 50px auto;
+  font-size: 25px;
+  font-weight: bold;
   text-align: center;
   color: #4481c3;
 
