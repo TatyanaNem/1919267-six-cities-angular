@@ -1,10 +1,5 @@
-import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { validatePassword } from './validators/validatePassword';
 import { validateEmail } from './validators/validateEmail';
 import { LoginData } from './model/loginData.model';
@@ -16,9 +11,11 @@ import { LoginData } from './model/loginData.model';
   styleUrl: './login-form.component.css',
 })
 export class LoginFormComponent {
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, validateEmail]),
-    password: new FormControl('', [Validators.required, validatePassword]),
+  private fb = inject(FormBuilder);
+
+  loginForm = this.fb.group({
+    email: this.fb.control('', [Validators.required, validateEmail]),
+    password: this.fb.control('', [Validators.required, validatePassword]),
   });
 
   private loginData = {

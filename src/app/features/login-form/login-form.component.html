@@ -2,31 +2,38 @@
   <div class="login__input-wrapper form__input-wrapper">
     <label class="visually-hidden" for="email">E-mail</label>
     <input formControlName="email" class="login__input form__input" type="email" name="email" placeholder="Email">
-    @if (loginForm.get('email')?.pristine && loginForm.get('email')?.touched) {
-    <p class="error">
-      Email is required
-    </p>
-    }
-    @if (loginForm.get('email')?.touched && loginForm.controls.email.hasError('emailInvalid')) {
-    <p class="error">
-      The email is invalid
-    </p>
-    }
+
+    <div class="error-container">
+      @if (loginForm.get('email')?.pristine && loginForm.get('email')?.touched) {
+      <p class="error">
+        Email is required
+      </p>
+      }
+      @if (loginForm.get('email')?.touched && loginForm.controls.email.hasError('emailInvalid')) {
+      <p class="error">
+        The email is invalid
+      </p>
+      }
+    </div>
   </div>
   <div class="login__input-wrapper form__input-wrapper">
     <label class="visually-hidden" for="password">Password</label>
     <input formControlName="password" class="login__input form__input" type="password" name="password"
       placeholder="Password" autocomplete="false">
-    @if (loginForm.get('password')?.pristine && loginForm.get('password')?.touched) {
-    <p class="error">
-      Password is required
-    </p>
-    }
-    @if (loginForm.controls.password.hasError('passwordInvalid')) {
-    <p class="error">
-      The password must have at least one letter and one digit
-    </p>
-    }
+
+    <div class="error-container">
+      @if (loginForm.get('password')?.pristine && loginForm.get('password')?.touched) {
+      <span class="error">
+        Password is required
+      </span>
+      }
+      @if (loginForm.controls.password.hasError('passwordInvalid')) {
+      <p class="error">
+        The password must have at least one letter and one digit
+      </p>
+      }
+    </div>
+
   </div>
   <button class="login__submit form__submit button" type="submit" [disabled]="!loginForm.valid">Sign in</button>
 </form>

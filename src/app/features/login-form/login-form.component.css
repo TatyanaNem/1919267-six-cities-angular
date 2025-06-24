@@ -1,6 +1,28 @@
+.error-container {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  transition: opacity 0.3s ease-in-out;
+}
+
 .error {
   color: tomato;
+  font-size: 12px;
+  opacity: 1;
+  visibility: visible;
   margin-top: -15px;
   margin-bottom: 25px;
-  font-size: 12px;
+}
+
+.error-container span.error,
+.error-container p.error {
+  max-height: 24px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.error-container:empty {
+  opacity: 0;
+  visibility: hidden;
 }
