@@ -4,6 +4,7 @@ import { validatePassword } from './validators/validatePassword';
 import { validateEmail } from './validators/validateEmail';
 import { LoginData } from './model/loginData.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../core/auth/services/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -12,7 +13,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './login-form.component.css',
 })
 export class LoginFormComponent {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {}
   private fb = inject(FormBuilder);
 
   loginForm = this.fb.group({
@@ -26,8 +31,7 @@ export class LoginFormComponent {
   };
 
   backToPreviousPage() {
-    console.log(this.route.snapshot.queryParams['redirectTo']);
-    this.router.navigate([this.route.snapshot.queryParams['redirectTo']]);
+    this.router.navigateByUrl(this.authService.redirectUrl);
   }
 
   onSubmit(): void {
