@@ -65,6 +65,8 @@
       <app-near-places-block></app-near-places-block>
     </div>
   </main>
+  } @else {
+  <app-not-found-block [type]="'offer'"></app-not-found-block>
   }
 
 </app-layout>

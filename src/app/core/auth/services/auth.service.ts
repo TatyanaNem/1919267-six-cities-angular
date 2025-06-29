@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  isAuth = true;
+  isAuth = false;
+  redirectUrl = '/';
 
   isAuthenticated() {
     return this.isAuth;
