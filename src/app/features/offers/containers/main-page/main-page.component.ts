@@ -1,6 +1,6 @@
 import { Cities } from '../../../../shared/enums/cities.enum';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Offer } from '../../models/offer';
 import { LayoutComponent } from '../../../../core/layout/layout.component';
 import { TabsComponent } from './components/tabs/tabs.component';
@@ -8,7 +8,11 @@ import { MainBlockEmptyComponent } from './components/main-block-empty/main-bloc
 import { MainBlockComponent } from './components/main-block/main-block.component';
 import { MapComponent } from '../../components/map/map.component';
 import { CityMap } from '../../../../shared/constants';
-import { offers } from '../../mocks/offers';
+import { Store } from '@ngrx/store';
+import * as OffersActions from '../../offers-slice/actions';
+import { Observable } from 'rxjs';
+import { offersSelector } from '../../offers-slice/selectors';
+import { AppState } from '../../../../store';
 
 @Component({
   selector: 'app-main-page',
@@ -22,11 +26,25 @@ import { offers } from '../../mocks/offers';
   ],
   templateUrl: './main-page.component.html',
 })
-export class MainPageComponent {
-  offers: Offer[] = offers;
+export class MainPageComponent implements OnInit {
+  constructor(private store: Store<AppState>) {
+    this.offers$ = this.store.select(offersSelector);
+  }
+
+  public offers: Offer[] = [];
+
+  private readonly offers$: Observable<Offer[]>;
+
   currentCity = Cities.Amsterdam;
   cityForMap = CityMap[this.currentCity];
   activeOfferId: string | null = null;
+
+  ngOnInit(): void {
+    this.store.dispatch(OffersActions.enter());
+    this.offers$.subscribe((data) => {
+      this.offers = data || [];
+    });
+  }
 
   onChangeCurrentCity(city: Cities) {
     this.currentCity = city;

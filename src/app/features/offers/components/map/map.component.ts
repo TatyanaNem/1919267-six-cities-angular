@@ -1,4 +1,3 @@
-// Импортируем необходимые модули Angular
 import {
   Component,
   AfterViewInit,
