@@ -16,7 +16,7 @@ export const initialState: State = {
   isLoading: false,
   offers: [],
   error: null,
-  currentCity: Cities.Amsterdam,
+  currentCity: Cities.Paris,
 };
 
 export const reducer = createReducer(

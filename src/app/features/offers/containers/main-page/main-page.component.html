@@ -8,7 +8,8 @@
         <div [class.cities__places-container--empty]="offers?.length === 0" class="cities__places-container container">
 
           <ng-container *ngIf="offers.length > 0; else empty">
-            <app-main-block [offers]="offers" (changeActiveId)="onChangeActiveId($event)"></app-main-block>
+            <app-main-block [offers]="offers" [currentCity]="(currentCity$ | async)!"
+              (changeActiveId)="onChangeActiveId($event)"></app-main-block>
             <div class="cities__right-section">
               <app-map [city]="cityForMap" [offers]="offers" [activeOfferId]="activeOfferId">
               </app-map>
@@ -23,6 +24,6 @@
 </app-layout>
 
 <ng-template #empty>
-  <app-main-block-empty></app-main-block-empty>
+  <app-main-block-empty [currentCity]="(currentCity$ | async)!"></app-main-block-empty>
   <div class="cities__right-section"></div>
 </ng-template>

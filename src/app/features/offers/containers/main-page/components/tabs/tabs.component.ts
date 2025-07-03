@@ -8,7 +8,7 @@ import { Cities } from '../../../../../../shared/enums/cities.enum';
   styleUrl: './tabs.component.css',
 })
 export class TabsComponent {
-  @Input() currentCity = Cities.Paris;
+  @Input() currentCity!: Cities;
   @Output() changeCity = new EventEmitter<Cities>();
   cities = Object.values(Cities);
 

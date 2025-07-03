@@ -12,3 +12,10 @@ export const currentCitySelector = createSelector(
   selectFeature,
   (state) => state.currentCity
 );
+
+export const offersByCitySelector = createSelector(
+  offersSelector,
+  currentCitySelector,
+  (allOffers, currentCity) =>
+    allOffers.filter((offer) => offer.city.name === currentCity)
+);

@@ -11,7 +11,7 @@ import { CityMap } from '../../../../shared/constants';
 import { Store } from '@ngrx/store';
 import * as OffersActions from '../../offers-slice/actions';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
-import { offersSelector } from '../../offers-slice/selectors';
+import { offersByCitySelector } from '../../offers-slice/selectors';
 import { AppState } from '../../../../store';
 
 @Component({
@@ -30,12 +30,12 @@ export class MainPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(private store: Store<AppState>) {
-    this.offers$ = this.store.select(offersSelector);
+    this.offers$ = this.store.select(offersByCitySelector);
   }
 
   offers$: Observable<Offer[]>;
-  currentCity$ = new BehaviorSubject<Cities>(Cities.Amsterdam);
-  cityForMap = CityMap[Cities.Amsterdam];
+  currentCity$ = new BehaviorSubject<Cities>(Cities.Paris);
+  cityForMap = CityMap[Cities.Paris];
   activeOfferId: string | null = null;
 
   ngOnInit(): void {
