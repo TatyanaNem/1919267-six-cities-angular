@@ -1,5 +1,5 @@
 import { Cities } from './enums/cities.enum';
-import { Location } from './types/location';
+import { Location } from '../features/offers/models/location';
 
 export const CityMap: Record<Cities, Location> = {
   [Cities.Paris]: { latitude: 48.83635, longitude: 2.351499, zoom: 12 },
