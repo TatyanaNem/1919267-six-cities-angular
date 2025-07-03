@@ -1,12 +1,17 @@
 import { createAction, props } from '@ngrx/store';
 import { Offer } from '../models/offer';
+import { Cities } from '../../../shared/enums/cities.enum';
 
-export const getOffers = createAction('[Offers] Enter');
+export const getOffers = createAction('[Main Offers Page] Get Offers');
 export const getOffersSuccess = createAction(
-  '[Offers] Get Offers Success',
+  '[Main Offers Page] Get Offers Success',
   props<{ offers: Offer[] }>()
 );
 export const getOffersFailure = createAction(
-  '[Offers] Get Offers Failure',
+  '[Main Offers Page] Get Offers Failure',
   props<{ error: string }>()
+);
+export const setCurrentCity = createAction(
+  '[Main Offers Page] Set Current City',
+  props<{ city: Cities }>()
 );

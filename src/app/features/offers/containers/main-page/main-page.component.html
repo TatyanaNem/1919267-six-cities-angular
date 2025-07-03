@@ -3,7 +3,7 @@
   <ng-container *ngIf="(offers$ | async) as offers">
     <main [class.page__main--index-empty]="offers?.length === 0" class="page__main page__main--index">
       <h1 class="visually-hidden">Cities</h1>
-      <app-tabs [currentCity]="currentCity" (changeCity)="onChangeCurrentCity($event)"></app-tabs>
+      <app-tabs [currentCity]="(currentCity$ | async)!" (changeCity)="onChangeCurrentCity($event)"></app-tabs>
       <div class="cities">
         <div [class.cities__places-container--empty]="offers?.length === 0" class="cities__places-container container">
 

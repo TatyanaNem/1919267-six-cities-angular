@@ -1,6 +1,6 @@
 import { Cities } from '../../../../shared/enums/cities.enum';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Offer } from '../../models/offer';
 import { LayoutComponent } from '../../../../core/layout/layout.component';
 import { TabsComponent } from './components/tabs/tabs.component';
@@ -10,7 +10,7 @@ import { MapComponent } from '../../components/map/map.component';
 import { CityMap } from '../../../../shared/constants';
 import { Store } from '@ngrx/store';
 import * as OffersActions from '../../offers-slice/actions';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { offersSelector } from '../../offers-slice/selectors';
 import { AppState } from '../../../../store';
 
@@ -26,27 +26,36 @@ import { AppState } from '../../../../store';
   ],
   templateUrl: './main-page.component.html',
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+
   constructor(private store: Store<AppState>) {
     this.offers$ = this.store.select(offersSelector);
   }
 
   offers$: Observable<Offer[]>;
-
-  currentCity = Cities.Amsterdam;
-  cityForMap = CityMap[this.currentCity];
+  currentCity$ = new BehaviorSubject<Cities>(Cities.Amsterdam);
+  cityForMap = CityMap[Cities.Amsterdam];
   activeOfferId: string | null = null;
 
   ngOnInit(): void {
     this.store.dispatch(OffersActions.getOffers());
+    this.currentCity$.pipe(takeUntil(this.destroy$)).subscribe((city) => {
+      this.cityForMap = CityMap[city];
+    });
   }
 
   onChangeCurrentCity(city: Cities) {
-    this.currentCity = city;
-    this.cityForMap = CityMap[this.currentCity];
+    this.store.dispatch(OffersActions.setCurrentCity({ city }));
+    this.currentCity$.next(city);
   }
 
   onChangeActiveId(id: string | null) {
     this.activeOfferId = id;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

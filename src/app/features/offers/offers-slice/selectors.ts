@@ -7,3 +7,8 @@ export const offersSelector = createSelector(
   selectFeature,
   (state) => state.offers
 );
+
+export const currentCitySelector = createSelector(
+  selectFeature,
+  (state) => state.currentCity
+);
