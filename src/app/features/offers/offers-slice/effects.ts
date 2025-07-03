@@ -11,7 +11,7 @@ export class OffersEffects {
   getOffers$ = createEffect(
     (actions$ = inject(Actions), offersService = inject(OffersService)) =>
       actions$.pipe(
-        ofType(OffersActions.enter),
+        ofType(OffersActions.getOffers),
         mergeMap(() => {
           return offersService.getOffers().pipe(
             map((offers: Offer[]) =>

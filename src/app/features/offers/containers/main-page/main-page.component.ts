@@ -31,19 +31,14 @@ export class MainPageComponent implements OnInit {
     this.offers$ = this.store.select(offersSelector);
   }
 
-  public offers: Offer[] = [];
-
-  private readonly offers$: Observable<Offer[]>;
+  offers$: Observable<Offer[]>;
 
   currentCity = Cities.Amsterdam;
   cityForMap = CityMap[this.currentCity];
   activeOfferId: string | null = null;
 
   ngOnInit(): void {
-    this.store.dispatch(OffersActions.enter());
-    this.offers$.subscribe((data) => {
-      this.offers = data || [];
-    });
+    this.store.dispatch(OffersActions.getOffers());
   }
 
   onChangeCurrentCity(city: Cities) {
