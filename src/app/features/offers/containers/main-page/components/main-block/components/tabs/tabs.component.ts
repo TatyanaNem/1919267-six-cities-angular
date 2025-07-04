@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Cities } from '../../../../../../shared/enums/cities.enum';
+import { Cities } from '../../../../../../../../shared/enums/cities.enum';
 
 @Component({
   selector: 'app-tabs',

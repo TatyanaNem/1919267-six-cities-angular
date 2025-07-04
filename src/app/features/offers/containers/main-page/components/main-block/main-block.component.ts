@@ -3,10 +3,11 @@ import { Offer } from '../../../../models/offer';
 import { PluralEndingPipe } from '../../../../../../shared/pipes/plural-ending.pipe';
 import { OfferCardComponent } from '../../../../components/offer-card/offer-card.component';
 import { Cities } from '../../../../../../shared/enums/cities.enum';
+import { SortingFormComponent } from './components/sorting-form/sorting-form.component';
 
 @Component({
   selector: 'app-main-block',
-  imports: [PluralEndingPipe, OfferCardComponent],
+  imports: [PluralEndingPipe, OfferCardComponent, SortingFormComponent],
   templateUrl: './main-block.component.html',
   styleUrl: './main-block.component.css',
 })
