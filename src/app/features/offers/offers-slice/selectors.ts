@@ -16,6 +16,7 @@ export const currentCitySelector = createSelector(
 export const offersByCitySelector = createSelector(
   offersSelector,
   currentCitySelector,
-  (allOffers, currentCity) =>
-    allOffers.filter((offer) => offer.city.name === currentCity)
+  (allOffers, currentCity) => {
+    return allOffers.filter((offer) => offer.city.name === currentCity);
+  }
 );

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SortingOptions } from '../../../../../../../../shared/enums/sorting-options.enum';
 
 @Component({
@@ -8,14 +8,15 @@ import { SortingOptions } from '../../../../../../../../shared/enums/sorting-opt
   styleUrl: './sorting-form.component.css',
 })
 export class SortingFormComponent implements OnInit {
-  sortingOptions = Object.values(SortingOptions);
-  selectedOption = SortingOptions.Popular;
+  @Input() selectedOption!: SortingOptions;
+  @Output() changeSortingOption = new EventEmitter<SortingOptions>();
+  sortingOptionsList = Object.values(SortingOptions);
   isFormOpened = false;
   isHovered: boolean[] = [];
 
   ngOnInit() {
     this.isHovered = Array.from(
-      { length: this.sortingOptions.length },
+      { length: this.sortingOptionsList.length },
       () => false
     );
   }
@@ -32,8 +33,8 @@ export class SortingFormComponent implements OnInit {
     this.isFormOpened = !this.isFormOpened;
   }
 
-  setSelectedOption(item: SortingOptions) {
-    this.selectedOption = item;
+  setSortingOption(item: SortingOptions) {
+    this.changeSortingOption.emit(item);
     this.isFormOpened = false;
   }
 }

@@ -1,7 +1,8 @@
 <section class="cities__places places">
   <h2 class="visually-hidden">Places</h2>
   <b class="places__found">{{offers.length}} {{'place' | pluralEnding: offers.length}} to stay in {{currentCity}}</b>
-  <app-sorting-form></app-sorting-form>
+  <app-sorting-form [selectedOption]="selectedOption()"
+    (changeSortingOption)="oncChangeSortingOption($event)"></app-sorting-form>
   <div class="cities__places-list places__list tabs__content">
     @for (offer of offers; track offer.id) {
     <app-offer-card [offer]="offer" (mouseenter)="onMouseOnCard(offer.id)"

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Offer } from '../../models/offer';
 import { LayoutComponent } from '../../../../core/layout/layout.component';
-import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
 import { MainBlockEmptyComponent } from './components/main-block-empty/main-block-empty.component';
 import { MainBlockComponent } from './components/main-block/main-block.component';
 import { MapComponent } from '../../components/map/map.component';
@@ -13,6 +12,7 @@ import * as OffersActions from '../../offers-slice/actions';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { offersByCitySelector } from '../../offers-slice/selectors';
 import { AppState } from '../../../../store';
+import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
 
 @Component({
   selector: 'app-main-page',
