@@ -20,7 +20,7 @@ export const routes: Routes = [
     path: 'favorites',
     loadComponent: () =>
       import(
-        './features/offers/containers/favorites-page/favorites-page.component'
+        './features/favorites/containers/favorites-page/favorites-page.component'
       ).then((c) => c.FavoritesPageComponent),
     title: 'Favorites page',
     canActivate: [AuthGuard],

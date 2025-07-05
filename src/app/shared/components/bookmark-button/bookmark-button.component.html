@@ -1,6 +1,6 @@
 <button
   [class]="isFavorite ? `${block}__bookmark-button button ${block}__bookmark-button--active` : `${block}__bookmark-button button`"
-  type="button">
+  type="button" (click)="onBookmarkClickHandler()">
   <svg [class]="block + '__bookmark-icon'" [attr.width]="bookmarkSize[size].width"
     [attr.height]="bookmarkSize[size].height">
     <use xlink:href="#icon-bookmark"></use>

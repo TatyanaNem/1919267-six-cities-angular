@@ -9,15 +9,15 @@ import { ReviewsBlockComponent } from '@app/features/offers/containers/offer-det
 import { LayoutComponent } from '@app/core/layout';
 import { NearPlacesBlockComponent } from '@app/features/offers/containers/offer-details-page/components';
 import { Review } from './components/reviews-block/types/review.type';
-import {
-  MapComponent,
-  PremiumMarkComponent,
-} from '@app/features/offers/components';
+import { MapComponent } from '@app/features/offers/components';
 import { OfferGalleryComponent } from '@app/features/offers/containers/offer-details-page/components';
-import { BookmarkButtonComponent } from '@app/features/offers/components';
 import { offers } from '../../mocks/offers';
 import { reviews } from '../../mocks/reviews';
 import { NotFoundBlockComponent } from 'src/app/core/containers/not-found-page/components/not-found-block/not-found-block.component';
+import {
+  BookmarkButtonComponent,
+  PremiumMarkComponent,
+} from '@app/shared/components';
 
 @Component({
   selector: 'app-offer-page',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { offers } from '../../../../mocks/offers';
-import { OfferCardComponent } from '@app/features/offers/components';
 import { Offer } from '@app/features/offers/models';
+import { OfferCardComponent } from '@app/shared/components';
 
 @Component({
   selector: 'app-near-places-block',

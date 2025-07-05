@@ -6,6 +6,7 @@ import { routes } from './app.routes';
 import { rootReducers } from './store';
 import { provideEffects } from '@ngrx/effects';
 import { OffersEffects } from './features/offers/offers-slice/effects';
+import { FavoritesEffects } from './features/favorites/favorites-slice/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
       maxAge: 25,
       autoPause: true,
     }),
-    provideEffects(OffersEffects),
+    provideEffects(OffersEffects, FavoritesEffects),
   ],
 };

@@ -12,7 +12,8 @@
         <b class="place-card__price-value">&euro;{{offer.price}}</b>
         <span class="place-card__price-text">&#47;&nbsp;night</span>
       </div>
-      <app-bookmark-button [isFavorite]="offer.isFavorite"></app-bookmark-button>
+      <app-bookmark-button [isFavorite]="offer.isFavorite"
+        (updateFavoriteStatus)="updateFavoriteStatus($event)"></app-bookmark-button>
     </div>
     <div class="place-card__rating rating">
       <div class="place-card__stars rating__stars">

@@ -8,11 +8,11 @@ import {
 } from '@angular/core';
 import { Offer } from '@app/features/offers/models';
 import { PluralEndingPipe } from '@app/shared/pipes';
-import { OfferCardComponent } from '@app/features/offers/components';
 import { Cities } from '@app/shared/enums';
 import { SortingFormComponent } from './components/sorting-form/sorting-form.component';
 import { SortingOptions } from '@app/shared/enums';
 import { sortingMap } from '@app/shared/utils';
+import { OfferCardComponent } from '@app/shared/components';
 @Component({
   selector: 'app-main-block',
   imports: [PluralEndingPipe, OfferCardComponent, SortingFormComponent],

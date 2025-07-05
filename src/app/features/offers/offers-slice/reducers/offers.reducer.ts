@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { Offer } from '../../models/offer';
+import { Offer } from '@app/features/offers/models';
 import * as OffersActions from '../actions';
-import { Cities } from '../../../../shared/enums/cities.enum';
+import { Cities } from '@app/shared/enums';
 
 export const offersFeatureKey = 'offers';
 
@@ -38,5 +38,11 @@ export const reducer = createReducer(
     ...state,
     isLoading: false,
     error: action.error,
+  })),
+  on(OffersActions.updateFavoriteStatus, (state, action) => ({
+    ...state,
+    offers: state.offers.map((offer: Offer) =>
+      offer.id === action.id ? { ...offer, isFavorite: action.status } : offer
+    ),
   }))
 );
