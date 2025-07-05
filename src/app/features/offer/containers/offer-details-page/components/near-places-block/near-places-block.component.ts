@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { offers } from '../../../../mocks/offers';
+import { offers } from '../../../../../offers/mocks/offers';
 import { Offer } from '@app/features/offers/models';
 import { OfferCardComponent } from '@app/shared/components';
 

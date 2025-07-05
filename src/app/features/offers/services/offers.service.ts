@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Offer } from '../models/offer';
-import { offers } from '../mocks/offers';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OffersService {
+  constructor(private http: HttpClient) {}
   getOffers(): Observable<Offer[]> {
-    return of(offers).pipe(delay(2000));
+    return this.http
+      .get<Offer[]>(`https://15.design.htmlacademy.pro/six-cities/offers`)
+      .pipe(map((offers) => offers));
   }
 }

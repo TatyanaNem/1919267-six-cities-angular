@@ -1,4 +1,4 @@
-import { Review } from '../containers/offer-details-page/components/reviews-block/types/review.type';
+import { Review } from '../../offer/containers/offer-details-page/components/reviews-block/types/review.type';
 
 export const reviews: Review[] = [
   {

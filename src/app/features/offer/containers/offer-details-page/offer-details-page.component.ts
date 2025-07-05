@@ -4,20 +4,21 @@ import { Offer } from '@app/features/offers/models';
 import { GetRatingPipe } from '@app/shared/pipes';
 import { PluralEndingPipe } from '@app/shared/pipes';
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { HostUserComponent } from '@app/features/offers/containers/offer-details-page/components';
-import { ReviewsBlockComponent } from '@app/features/offers/containers/offer-details-page/components';
+import { HostUserComponent } from 'src/app/features/offer/containers/offer-details-page/components';
+import { ReviewsBlockComponent } from 'src/app/features/offer/containers/offer-details-page/components';
 import { LayoutComponent } from '@app/core/layout';
-import { NearPlacesBlockComponent } from '@app/features/offers/containers/offer-details-page/components';
+import { NearPlacesBlockComponent } from 'src/app/features/offer/containers/offer-details-page/components';
 import { Review } from './components/reviews-block/types/review.type';
 import { MapComponent } from '@app/features/offers/components';
-import { OfferGalleryComponent } from '@app/features/offers/containers/offer-details-page/components';
-import { offers } from '../../mocks/offers';
-import { reviews } from '../../mocks/reviews';
+import { OfferGalleryComponent } from 'src/app/features/offer/containers/offer-details-page/components';
+import { offers } from '../../../offers/mocks/offers';
+import { reviews } from '../../../offers/mocks/reviews';
 import { NotFoundBlockComponent } from 'src/app/core/containers/not-found-page/components/not-found-block/not-found-block.component';
 import {
   BookmarkButtonComponent,
   PremiumMarkComponent,
 } from '@app/shared/components';
+import { OfferService } from '../../services';
 
 @Component({
   selector: 'app-offer-page',
@@ -44,11 +45,16 @@ export class OfferDetailsPageComponent implements OnInit {
   offers: Offer[] = offers;
   reviews: Review[] = reviews;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private offerService: OfferService
+  ) {}
 
   ngOnInit(): void {
     this.offerId = this.route.snapshot.paramMap.get('offerId') ?? '';
 
-    this.currentOffer = this.offers.find((offer) => offer.id === this.offerId);
+    if (this.offerId) {
+      this.offerService.getActiveOffer(this.offerId);
+    }
   }
 }

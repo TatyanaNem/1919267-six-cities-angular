@@ -7,6 +7,8 @@ import { rootReducers } from './store';
 import { provideEffects } from '@ngrx/effects';
 import { OffersEffects } from './features/offers/offers-slice/effects';
 import { FavoritesEffects } from './features/favorites/favorites-slice/effects';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { ActiveOfferEffects } from './features/offer/offer-slice';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +19,7 @@ export const appConfig: ApplicationConfig = {
       maxAge: 25,
       autoPause: true,
     }),
-    provideEffects(OffersEffects, FavoritesEffects),
+    provideEffects(OffersEffects, FavoritesEffects, ActiveOfferEffects),
+    provideHttpClient(withFetch()),
   ],
 };

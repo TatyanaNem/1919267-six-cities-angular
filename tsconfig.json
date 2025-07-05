@@ -51,7 +51,7 @@
         "./src/app/features/offers/containers/index.ts"
       ],
       "@app/features/offers/containers/offer-details-page/components": [
-        "./src/app/features/offers/containers/offer-details-page/components/index.ts"
+        "src/app/features/offer/containers/offer-details-page/components/index.ts"
       ],
       "@app/features/offers/models": [
         "./src/app/features/offers/models/index.ts"
@@ -72,7 +72,16 @@
         "./src/app/features/favorites/favorites-slice/index.ts"
       ],
       "@app/features/favorites/services": [
-        "./src/app/features/favorites/services/index.ts"
+        "./src/app/features/offer/services/index.ts"
+      ],
+      "@app/features/offer/containers": [
+        "./src/app/features/offer/containers/index.ts"
+      ],
+      "@app/features/offer/offer-slice": [
+        "./src/app/features/offer/offer-slice/index.ts"
+      ],
+      "@app/features/offer/services": [
+        "./src/app/features/offer/services/index.ts"
       ]
     }
   },

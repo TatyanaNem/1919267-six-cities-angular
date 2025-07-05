@@ -12,7 +12,7 @@ export const routes: Routes = [
     path: 'offer/:offerId',
     loadComponent: () =>
       import(
-        './features/offers/containers/offer-details-page/offer-details-page.component'
+        './features/offer/containers/offer-details-page/offer-details-page.component'
       ).then((c) => c.OfferDetailsPageComponent),
     title: 'Offer page',
   },
