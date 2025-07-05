@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { LayoutComponent } from '../../layout/layout.component';
 import { NotFoundBlockComponent } from './components/not-found-block/not-found-block.component';
+import { LayoutComponent } from '@app/core/layout';
 
 @Component({
   selector: 'app-not-found-page',

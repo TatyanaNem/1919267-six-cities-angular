@@ -1,18 +1,18 @@
-import { Cities } from '../../../../shared/enums/cities.enum';
+import { Cities } from '@app/shared/enums';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Offer } from '../../models/offer';
-import { LayoutComponent } from '../../../../core/layout/layout.component';
+import { Offer } from '@app/features/offers/models';
+import { LayoutComponent } from '@app/core/layout';
 import { MainBlockEmptyComponent } from './components/main-block-empty/main-block-empty.component';
 import { MainBlockComponent } from './components/main-block/main-block.component';
-import { MapComponent } from '../../components/map/map.component';
-import { CityMap } from '../../../../shared/constants';
+import { MapComponent } from '@app/features/offers/components';
+import { CityMap } from '@app/shared/constants';
 import { Store } from '@ngrx/store';
-import * as OffersActions from '../../offers-slice/actions';
+import * as OffersActions from '@app/features/offers/offers-slice';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
-import { offersByCitySelector } from '../../offers-slice/selectors';
-import { AppState } from '../../../../store';
+import { AppState } from '@app/store';
 import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
+import { offersByCitySelector } from '@app/features/offers/offers-slice';
 
 @Component({
   selector: 'app-main-page',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Offer } from '../../models/offer';
-import { OfferCardComponent } from '../../components/offer-card/offer-card.component';
-import { LayoutComponent } from '../../../../core/layout/layout.component';
+import { Offer } from '@app/features/offers/models';
+import { LayoutComponent } from '@app/core/layout';
 import { offers } from '../../mocks/offers';
+import { OfferCardComponent } from '@app/features/offers/components';
 
 @Component({
   selector: 'app-favorites-page',

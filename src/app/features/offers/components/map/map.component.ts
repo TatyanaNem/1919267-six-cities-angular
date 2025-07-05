@@ -6,9 +6,9 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import * as L from 'leaflet';
-import { CityMap } from '../../../../shared/constants';
+import { CityMap } from '@app/shared/constants';
 import { Offer } from '../../models/offer';
-import { Cities } from '../../../../shared/enums/cities.enum';
+import { Cities } from '@app/shared/enums';
 
 const defaultCustomIcon = L.icon({
   iconUrl: 'img/pin.svg',

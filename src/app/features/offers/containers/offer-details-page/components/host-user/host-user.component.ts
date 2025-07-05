@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Host } from '../../../../models/host';
+import { Host } from '@app/features/offers/models';
 
 @Component({
   selector: 'app-host-user',

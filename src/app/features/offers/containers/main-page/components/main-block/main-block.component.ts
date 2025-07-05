@@ -6,13 +6,13 @@ import {
   Output,
   signal,
 } from '@angular/core';
-import { Offer } from '../../../../models/offer';
-import { PluralEndingPipe } from '../../../../../../shared/pipes/plural-ending.pipe';
-import { OfferCardComponent } from '../../../../components/offer-card/offer-card.component';
-import { Cities } from '../../../../../../shared/enums/cities.enum';
+import { Offer } from '@app/features/offers/models';
+import { PluralEndingPipe } from '@app/shared/pipes';
+import { OfferCardComponent } from '@app/features/offers/components';
+import { Cities } from '@app/shared/enums';
 import { SortingFormComponent } from './components/sorting-form/sorting-form.component';
-import { SortingOptions } from '../../../../../../shared/enums/sorting-options.enum';
-import { sortingMap } from '../../../../../../shared/utils/sorting';
+import { SortingOptions } from '@app/shared/enums';
+import { sortingMap } from '@app/shared/utils';
 @Component({
   selector: 'app-main-block',
   imports: [PluralEndingPipe, OfferCardComponent, SortingFormComponent],

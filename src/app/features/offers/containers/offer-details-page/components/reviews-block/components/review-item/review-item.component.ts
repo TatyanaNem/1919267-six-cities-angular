@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Review } from '../../types/review.type';
-import { GetRatingPipe } from '../../../../../../../../shared/pipes/get-rating.pipe';
+import { GetRatingPipe } from '@app/shared/pipes';
 import { DatePipe } from '@angular/common';
 
 @Component({
