@@ -64,6 +64,15 @@
       ],
       "@app/core/containers/not-found-page": [
         "./src/app/core/containers/not-found-page/index.ts"
+      ],
+      "@app/features/favorites/containers": [
+        "./src/app/features/favorites/containers/index.ts"
+      ],
+      "@app/features/favorites/favorites-slice": [
+        "./src/app/features/favorites/favorites-slice/index.ts"
+      ],
+      "@app/features/favorites/services": [
+        "./src/app/features/favorites/services/index.ts"
       ]
     }
   },

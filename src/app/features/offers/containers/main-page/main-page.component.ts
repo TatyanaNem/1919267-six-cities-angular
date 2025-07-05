@@ -9,7 +9,7 @@ import { MapComponent } from '@app/features/offers/components';
 import { CityMap } from '@app/shared/constants';
 import { Store } from '@ngrx/store';
 import * as OffersActions from '@app/features/offers/offers-slice';
-import * as FavoritesActions from '../../../favorites/favorites-slice/actions';
+import * as FavoritesActions from '@app/features/favorites/favorites-slice';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { AppState } from '@app/store';
 import { TabsComponent } from './components/main-block/components/tabs/tabs.component';

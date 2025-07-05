@@ -6,7 +6,7 @@ import { OfferCardComponent } from '@app/shared/components';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/store';
 import { map, switchMap } from 'rxjs/operators';
-import { selectFavorites } from '../../favorites-slice/selectors';
+import { selectFavorites } from '@app/features/favorites/favorites-slice';
 import { Observable, of } from 'rxjs';
 
 @Component({
