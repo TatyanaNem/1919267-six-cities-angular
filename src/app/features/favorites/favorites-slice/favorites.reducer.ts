@@ -2,8 +2,6 @@ import { Offer } from '@app/features/offers/models';
 import { createReducer, on } from '@ngrx/store';
 import * as FavoritesActions from './actions';
 
-export const favoritesFeatureKey = 'favorites';
-
 export interface State {
   isLoading: boolean;
   favorites: Offer[];

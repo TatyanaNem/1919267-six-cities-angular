@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SortingOptions } from '@app/shared/enums';
+import { SortingOptions } from '@app/const';
 
 @Component({
   selector: 'app-sorting-form',

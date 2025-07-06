@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Cities } from '@app/shared/enums';
+import { Cities } from '@app/const';
 
 @Component({
   selector: 'app-main-block-empty',

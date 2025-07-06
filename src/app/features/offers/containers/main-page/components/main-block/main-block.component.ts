@@ -8,9 +8,8 @@ import {
 } from '@angular/core';
 import { Offer } from '@app/features/offers/models';
 import { PluralEndingPipe } from '@app/shared/pipes';
-import { Cities } from '@app/shared/enums';
+import { Cities, DEFAULT_SORTING_OPTION, SortingOptions } from '@app/const';
 import { SortingFormComponent } from './components/sorting-form/sorting-form.component';
-import { SortingOptions } from '@app/shared/enums';
 import { sortingMap } from '@app/shared/utils';
 import { OfferCardComponent } from '@app/shared/components';
 @Component({
@@ -23,7 +22,7 @@ export class MainBlockComponent {
   @Input() offers: Offer[] = [];
   @Input() currentCity!: Cities;
   @Output() changeActiveId = new EventEmitter<string | null>();
-  public selectedOption = signal(SortingOptions.Popular);
+  public selectedOption = signal(DEFAULT_SORTING_OPTION);
   public sortedOffers = computed(() => {
     const sortingFn = sortingMap[this.selectedOption()];
     return sortingFn([...this.offers]);

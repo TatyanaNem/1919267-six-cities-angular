@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Review } from './types/review.type';
 import { ReviewItemComponent } from './components/review-item/review-item.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { MAX_SHOWN_REVIEWS } from '@app/const';
 
 @Component({
   selector: 'app-reviews-block',
@@ -12,7 +13,7 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
 export class ReviewsBlockComponent implements OnChanges {
   @Input() reviews: Review[] = [];
   sortedReviews: Review[] = [];
-  readonly MAX_SHOWN_REVIEWS = 10;
+  readonly reviewsToShow = MAX_SHOWN_REVIEWS;
 
   ngOnChanges(changes: SimpleChanges) {
     if ('reviews' in changes) {

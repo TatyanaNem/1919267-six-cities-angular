@@ -1,4 +1,4 @@
-import { Cities } from '@app/shared/enums';
+import { Cities, CityMap } from '@app/const';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -11,7 +11,6 @@ import { LayoutComponent } from '@app/core/layout';
 import { MainBlockEmptyComponent } from './components/main-block-empty/main-block-empty.component';
 import { MainBlockComponent } from './components/main-block/main-block.component';
 import { MapComponent } from '@app/features/offers/components';
-import { CityMap } from '@app/shared/constants';
 import { Store } from '@ngrx/store';
 import * as OffersActions from '@app/features/offers/offers-slice';
 import * as FavoritesActions from '@app/features/favorites/favorites-slice';

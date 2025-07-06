@@ -1,5 +1,5 @@
+import { SortingOptions } from '@app/const';
 import { Offer } from '../../features/offers/models/offer';
-import { SortingOptions } from '../enums/sorting-options.enum';
 
 function sortByRating(itemA: Offer, itemB: Offer) {
   return itemB.rating - itemA.rating;

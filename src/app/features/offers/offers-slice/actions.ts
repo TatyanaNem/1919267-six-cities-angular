@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Offer } from '../models/offer';
-import { Cities } from '../../../shared/enums/cities.enum';
+import { Cities } from '@app/const';
 
 export const getOffers = createAction('[Main Offers Page] Get Offers');
 export const getOffersSuccess = createAction(

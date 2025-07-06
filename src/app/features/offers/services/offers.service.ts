@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable, timeout } from 'rxjs';
 import { Offer } from '../models/offer';
 import { HttpClient } from '@angular/common/http';
+import { APIRoute, BACKEND_URL, REQUEST_TIMEOUT } from '@app/const';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class OffersService {
   constructor(private http: HttpClient) {}
   getOffers(): Observable<Offer[]> {
     return this.http
-      .get<Offer[]>(`https://15.design.htmlacademy.pro/six-cities/offers`)
-      .pipe(map((offers) => offers));
+      .get<Offer[]>(`${BACKEND_URL}${APIRoute.Offers}`)
+      .pipe(timeout(REQUEST_TIMEOUT));
   }
 }

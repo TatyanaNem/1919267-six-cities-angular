@@ -1,4 +1,4 @@
-import { Cities } from '../../../shared/enums/cities.enum';
+import { Cities } from '@app/const';
 import { Offer, OfferType } from '../models/offer';
 
 export const offers: Offer[] = [

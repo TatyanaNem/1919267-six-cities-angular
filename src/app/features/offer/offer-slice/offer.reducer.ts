@@ -2,8 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 import { Offer } from '@app/features/offers/models';
 import * as OfferActions from '../offer-slice/actions';
 
-export const offerFeatureKey = 'offer';
-
 export interface State {
   isLoading: boolean;
   activeOffer: Offer | null;

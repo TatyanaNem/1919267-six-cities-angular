@@ -1,15 +1,16 @@
 import { Routes } from '@angular/router';
 import { MainPageComponent } from '@app/features/offers/containers';
 import { AuthGuard } from '@app/features/auth/guards';
+import { AppRoute } from './app.const';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: AppRoute.Main,
     component: MainPageComponent,
     title: 'Main page',
   },
   {
-    path: 'offer/:offerId',
+    path: AppRoute.Offer,
     loadComponent: () =>
       import(
         './features/offer/containers/offer-details-page/offer-details-page.component'
@@ -17,7 +18,7 @@ export const routes: Routes = [
     title: 'Offer page',
   },
   {
-    path: 'favorites',
+    path: AppRoute.Favorites,
     loadComponent: () =>
       import(
         './features/favorites/containers/favorites-page/favorites-page.component'
@@ -26,7 +27,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'login',
+    path: AppRoute.Login,
     loadComponent: () =>
       import('./features/auth/containers/login-page/login-page.component').then(
         (c) => c.LoginPageComponent
@@ -34,7 +35,7 @@ export const routes: Routes = [
     title: 'Login page',
   },
   {
-    path: '**',
+    path: AppRoute.NotFound,
     loadComponent: () =>
       import('./core/containers/not-found-page/not-found-page.component').then(
         (c) => c.NotFoundPageComponent

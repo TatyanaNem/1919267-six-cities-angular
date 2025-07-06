@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Cities } from '@app/shared/enums';
+import { Cities } from '@app/const';
+
 @Component({
   selector: 'app-tabs',
   imports: [],

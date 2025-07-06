@@ -1,9 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { Offer } from '@app/features/offers/models';
 import * as OffersActions from '../actions';
-import { Cities } from '@app/shared/enums';
-
-export const offersFeatureKey = 'offers';
+import { Cities } from '@app/const';
 
 export interface State {
   isLoading: boolean;

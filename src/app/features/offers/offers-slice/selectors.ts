@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../../../store';
 
-export const selectFeature = (state: AppState) => state.offers;
+export const selectFeature = (state: AppState) => state.OFFERS_DATA;
 
 export const offersSelector = createSelector(
   selectFeature,
