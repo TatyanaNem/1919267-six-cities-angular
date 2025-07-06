@@ -1,6 +1,11 @@
 import { Cities } from '@app/shared/enums';
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Offer } from '@app/features/offers/models';
 import { LayoutComponent } from '@app/core/layout';
 import { MainBlockEmptyComponent } from './components/main-block-empty/main-block-empty.component';
@@ -26,6 +31,7 @@ import { offersByCitySelector } from '@app/features/offers/offers-slice';
     MapComponent,
   ],
   templateUrl: './main-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

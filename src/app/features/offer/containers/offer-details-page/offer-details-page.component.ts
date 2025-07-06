@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Offer } from '@app/features/offers/models';
 import { GetRatingPipe } from '@app/shared/pipes';
@@ -19,6 +19,7 @@ import {
   PremiumMarkComponent,
 } from '@app/shared/components';
 import { OfferService } from '../../services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-offer-page',
@@ -38,10 +39,11 @@ import { OfferService } from '../../services';
     NotFoundBlockComponent,
   ],
   templateUrl: './offer-details-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferDetailsPageComponent implements OnInit {
   offerId = '';
-  currentOffer: Offer | undefined;
+  currentOffer$?: Observable<Offer>;
   offers: Offer[] = offers;
   reviews: Review[] = reviews;
 
@@ -54,7 +56,7 @@ export class OfferDetailsPageComponent implements OnInit {
     this.offerId = this.route.snapshot.paramMap.get('offerId') ?? '';
 
     if (this.offerId) {
-      this.offerService.getActiveOffer(this.offerId);
+      this.currentOffer$ = this.offerService.getActiveOffer(this.offerId);
     }
   }
 }

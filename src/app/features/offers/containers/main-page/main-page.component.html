@@ -1,29 +1,30 @@
 <app-layout>
 
-  <ng-container *ngIf="(offers$ | async) as offers">
-    <main [class.page__main--index-empty]="offers?.length === 0" class="page__main page__main--index">
-      <h1 class="visually-hidden">Cities</h1>
-      <app-tabs [currentCity]="(currentCity$ | async)!" (changeCity)="onChangeCurrentCity($event)"></app-tabs>
-      <div class="cities">
-        <div [class.cities__places-container--empty]="offers?.length === 0" class="cities__places-container container">
+  @if (offers$ | async; as offers) {
+  <main [class.page__main--index-empty]="offers?.length === 0" class="page__main page__main--index">
+    <h1 class="visually-hidden">Cities</h1>
+    <app-tabs [currentCity]="(currentCity$ | async)!" (changeCity)="onChangeCurrentCity($event)"></app-tabs>
+    <div class="cities">
+      <div [class.cities__places-container--empty]="offers?.length === 0" class="cities__places-container container">
 
-          <ng-container *ngIf="offers.length > 0; else empty">
-            <app-main-block [offers]="offers" [currentCity]="(currentCity$ | async)!"
-              (changeActiveId)="onChangeActiveId($event)"></app-main-block>
-            <div class="cities__right-section">
-              <app-map [city]="cityForMap" [offers]="offers" [activeOfferId]="activeOfferId">
-              </app-map>
-            </div>
-          </ng-container>
-
+        @if (offers && offers.length > 0) {
+        <app-main-block [offers]="offers" [currentCity]="(currentCity$ | async)!"
+          (changeActiveId)="onChangeActiveId($event)"></app-main-block>
+        <div class="cities__right-section">
+          <app-map [city]="cityForMap" [offers]="offers" [activeOfferId]="activeOfferId">
+          </app-map>
         </div>
+        } @else {
+        <app-main-block-empty [currentCity]="(currentCity$ | async)!"></app-main-block-empty>
+        <div class="cities__right-section"></div>
+        }
+
       </div>
-    </main>
-  </ng-container>
-
-</app-layout>
-
-<ng-template #empty>
+    </div>
+  </main>
+  } @else {
   <app-main-block-empty [currentCity]="(currentCity$ | async)!"></app-main-block-empty>
   <div class="cities__right-section"></div>
-</ng-template>
+  }
+
+</app-layout>
