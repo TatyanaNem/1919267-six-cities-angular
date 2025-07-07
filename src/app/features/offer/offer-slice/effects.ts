@@ -24,4 +24,20 @@ export class ActiveOfferEffects {
       )
     )
   );
+
+  getNearbyOffers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(OfferActions.getNearbyOffers.type),
+      mergeMap(({ id }) =>
+        this.offerService.getNearbyOffers(id).pipe(
+          map((nearByOffers: Offer[]) =>
+            OfferActions.getNearbyOffersSuccess({ nearByOffers })
+          ),
+          catchError((error) =>
+            of(OfferActions.getNearbyOffersFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
 }

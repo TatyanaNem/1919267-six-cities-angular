@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-
-import { offers } from '../../../../../offers/mocks/offers';
+import { Component, Input } from '@angular/core';
+import { MAX_NEARBY_OFFERS_COUNT } from '@app/const';
 import { Offer } from '@app/features/offers/models';
 import { OfferCardComponent } from '@app/shared/components';
 
@@ -11,5 +10,5 @@ import { OfferCardComponent } from '@app/shared/components';
   styleUrl: './near-places-block.component.css',
 })
 export class NearPlacesBlockComponent {
-  nearOffers: Offer[] = offers.slice(0, 3);
+  @Input() nearbyOffers: Offer[] = [].slice(MAX_NEARBY_OFFERS_COUNT);
 }

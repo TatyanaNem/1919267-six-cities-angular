@@ -7,3 +7,8 @@ export const selectActiveOffer = createSelector(
   selectFeature,
   (state) => state.activeOffer
 );
+
+export const selectNearbyOffers = createSelector(
+  selectFeature,
+  (state) => state.nearByOffers
+);

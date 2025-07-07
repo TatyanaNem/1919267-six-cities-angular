@@ -14,4 +14,12 @@ export class OfferService {
       .get<Offer>(`${BACKEND_URL}${APIRoute.Offers}/${id}`)
       .pipe(timeout(REQUEST_TIMEOUT));
   }
+
+  getNearbyOffers(id: string) {
+    return this.http
+      .get<Offer[]>(
+        `${BACKEND_URL}${APIRoute.Offers}/${id}${APIRoute.NearbyOffers}`
+      )
+      .pipe(timeout(REQUEST_TIMEOUT));
+  }
 }

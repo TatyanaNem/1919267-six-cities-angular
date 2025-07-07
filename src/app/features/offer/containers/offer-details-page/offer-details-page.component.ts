@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Offer } from '@app/features/offers/models';
 import { GetRatingPipe } from '@app/shared/pipes';
@@ -15,11 +15,19 @@ import {
   PremiumMarkComponent,
 } from '@app/shared/components';
 import { OfferService } from '../../services';
-import { Observable } from 'rxjs';
+import {
+  combineLatest,
+  EMPTY,
+  map,
+  Observable,
+  of,
+  shareReplay,
+  switchMap,
+} from 'rxjs';
 import { ReviewsBlockComponent } from '@app/features/reviews/containers';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/store';
-import { offersSelector } from '@app/features/offers/offers-slice';
+import { selectNearbyOffers } from '../../offer-slice';
 
 @Component({
   selector: 'app-offer-page',
@@ -39,26 +47,46 @@ import { offersSelector } from '@app/features/offers/offers-slice';
     NotFoundBlockComponent,
   ],
   templateUrl: './offer-details-page.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferDetailsPageComponent implements OnInit {
   offerId = '';
-  currentOffer$?: Observable<Offer>;
-  offers$: Observable<Offer[]>;
+  currentOffer$: Observable<Offer> = EMPTY;
+  combinedOffers$: Observable<Offer[]> = EMPTY;
+  nearbyOffers$: Observable<Offer[]>;
 
   constructor(
     private route: ActivatedRoute,
     private offerService: OfferService,
     private store: Store<AppState>
   ) {
-    this.offers$ = this.store.select(offersSelector);
+    this.nearbyOffers$ = this.store.select(selectNearbyOffers);
   }
 
   ngOnInit(): void {
-    this.offerId = this.route.snapshot.paramMap.get('offerId') ?? '';
-
-    if (this.offerId) {
-      this.currentOffer$ = this.offerService.getActiveOffer(this.offerId);
-    }
+    this.route.paramMap
+      .pipe(
+        switchMap((params) => {
+          this.offerId = params.get('offerId') || ''; // Получаем offerId из маршрута
+          return combineLatest([
+            (this.nearbyOffers$ = this.offerService.getNearbyOffers(
+              this.offerId
+            )),
+            (this.currentOffer$ = this.offerService.getActiveOffer(
+              this.offerId
+            )),
+          ]);
+        }),
+        map(([nearbyOffers, activeOffer]) => {
+          const allOffers = [...nearbyOffers];
+          if (activeOffer) {
+            allOffers.push(activeOffer);
+          }
+          return allOffers;
+        }),
+        shareReplay(1)
+      )
+      .subscribe((offers) => {
+        this.combinedOffers$ = of(offers);
+      });
   }
 }

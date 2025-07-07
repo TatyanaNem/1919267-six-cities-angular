@@ -60,14 +60,17 @@
           }
         </div>
       </div>
-      @if (offers$ | async; as offers) {
-      <app-map block="offer" [offers]="offers" [city]="currentOffer.city.location" [activeOfferId]="currentOffer.id">
+      @if (combinedOffers$ | async; as combinedOffers) {
+      <app-map block="offer" [offers]="combinedOffers" [city]="currentOffer.city.location"
+        [activeOfferId]="currentOffer.id">
       </app-map>
       }
     </section>
+    @if (nearbyOffers$ | async; as nearbyOffers) {
     <div class="container">
-      <app-near-places-block></app-near-places-block>
+      <app-near-places-block [nearbyOffers]="nearbyOffers"></app-near-places-block>
     </div>
+    }
   </main>
   } @else {<app-not-found-block [type]="'offer'"></app-not-found-block>}
 
