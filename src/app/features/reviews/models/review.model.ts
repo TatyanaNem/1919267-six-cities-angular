@@ -1,4 +1,4 @@
-import { Host } from '../../../../../../offers/models/host';
+import { Host } from '@app/features/offers/models';
 
 export interface Review {
   id: string;

@@ -55,11 +55,15 @@
               </p>
             </div>
           </div>
-          <app-reviews-block [reviews]="reviews"></app-reviews-block>
+          @if (offerId) {
+          <app-reviews-block [offerId]="offerId"></app-reviews-block>
+          }
         </div>
       </div>
+      @if (offers$ | async; as offers) {
       <app-map block="offer" [offers]="offers" [city]="currentOffer.city.location" [activeOfferId]="currentOffer.id">
       </app-map>
+      }
     </section>
     <div class="container">
       <app-near-places-block></app-near-places-block>

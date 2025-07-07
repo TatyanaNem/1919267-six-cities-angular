@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Review } from '../../types/review.type';
 import { GetRatingPipe } from '@app/shared/pipes';
 import { DatePipe } from '@angular/common';
+import { Review } from '../../models';
 
 @Component({
   selector: 'app-review-item',

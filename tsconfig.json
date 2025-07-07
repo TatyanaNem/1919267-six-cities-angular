@@ -81,6 +81,21 @@
       ],
       "@app/features/offer/services": [
         "./src/app/features/offer/services/index.ts"
+      ],
+      "@app/features/reviews/components": [
+        "./src/app/features/reviews/components/index.ts"
+      ],
+      "@app/features/reviews/containers": [
+        "./src/app/features/reviews/containers/index.ts"
+      ],
+      "@app/features/reviews/models": [
+        "src/app/features/reviews/models/index.ts"
+      ],
+      "@app/features/reviews/services": [
+        "./src/app/features/reviews/services/index.ts"
+      ],
+      "@app/features/reviews/reviews-slice": [
+        "./src/app/features/reviews/reviews-slice/index.ts"
       ]
     }
   },

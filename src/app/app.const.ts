@@ -65,7 +65,7 @@ enum RequestStatus {
 enum NameSpace {
   OffersData = 'OFFERS_DATA',
   OfferData = 'OFFER_DATA',
-  ReviewData = 'REVIEW_DATA',
+  ReviewsData = 'REVIEWS_DATA',
   UserData = 'USER_DATA',
   FavoritesData = 'FAVORITES_DATA',
   NearbyOffersData = 'NEARBY_OFFERS_DATA',
