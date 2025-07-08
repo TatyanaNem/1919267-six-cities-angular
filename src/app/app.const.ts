@@ -71,15 +71,6 @@ enum NameSpace {
   NearbyOffersData = 'NEARBY_OFFERS_DATA',
 }
 
-const HttpStatus = {
-  Ok: 200,
-  Created: 201,
-  BadRequest: 400,
-  Unauthorized: 401,
-  Forbidden: 403,
-  NotFound: 404,
-} as const;
-
 const enum FavoriteStatus {
   Added = 1,
   Deleted = 0,
@@ -114,7 +105,6 @@ export {
   MAX_SHOWN_REVIEWS,
   RequestStatus,
   NameSpace,
-  HttpStatus,
   CityMap,
   FavoriteStatus,
   ACTION_TYPE_REDIRECT,

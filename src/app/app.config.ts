@@ -7,9 +7,14 @@ import { rootReducers } from './store';
 import { provideEffects } from '@ngrx/effects';
 import { OffersEffects } from './features/offers/offers-slice/effects';
 import { FavoritesEffects } from './features/favorites/favorites-slice/effects';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { ActiveOfferEffects } from './features/offer/offer-slice';
 import { ReviewsEffects } from './features/reviews/reviews-slice';
+import { errorInterceptor, tokenInterceptor } from './core/interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +31,9 @@ export const appConfig: ApplicationConfig = {
       ActiveOfferEffects,
       ReviewsEffects
     ),
-    provideHttpClient(withFetch()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([tokenInterceptor, errorInterceptor])
+    ),
   ],
 };

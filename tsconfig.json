@@ -29,6 +29,7 @@
       "@app/core/containers/not-found-page/components": [
         "./src/app/core/containers/not-found-page/components/index.ts"
       ],
+      "@app/core/interceptors": ["./src/app/core/interceptors/index.ts"],
 
       "@app/store": ["./src/app/store/index.ts"],
 
