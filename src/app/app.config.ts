@@ -15,6 +15,7 @@ import {
 import { ActiveOfferEffects } from './features/offer/offer-slice';
 import { ReviewsEffects } from './features/reviews/reviews-slice';
 import { errorInterceptor, tokenInterceptor } from './core/interceptors';
+import { UserEffects } from './features/user/user-slice/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,7 +30,8 @@ export const appConfig: ApplicationConfig = {
       OffersEffects,
       FavoritesEffects,
       ActiveOfferEffects,
-      ReviewsEffects
+      ReviewsEffects,
+      UserEffects
     ),
     provideHttpClient(
       withFetch(),

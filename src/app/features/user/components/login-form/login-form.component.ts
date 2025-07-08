@@ -3,8 +3,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { validatePassword } from './validators/validatePassword';
 import { validateEmail } from './validators/validateEmail';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '@app/features/auth/services';
-import { Credentials } from '@app/features/auth/models';
+import { UserService } from '../../services';
+import { Credentials } from '../../models';
 
 @Component({
   selector: 'app-login-form',
@@ -16,7 +16,7 @@ export class LoginFormComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private userService: UserService
   ) {}
   private fb = inject(FormBuilder);
 
@@ -31,7 +31,7 @@ export class LoginFormComponent {
   };
 
   backToPreviousPage() {
-    this.router.navigateByUrl(this.authService.redirectUrl);
+    this.router.navigateByUrl(this.userService.redirectUrl);
   }
 
   onSubmit(): void {

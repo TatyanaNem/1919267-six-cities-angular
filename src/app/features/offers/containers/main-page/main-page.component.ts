@@ -1,4 +1,4 @@
-import { Cities, CityMap } from '@app/const';
+import { AuthorizationStatus, Cities, CityMap } from '@app/const';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,6 +14,7 @@ import { MapComponent } from '@app/features/offers/components';
 import { Store } from '@ngrx/store';
 import * as OffersActions from '@app/features/offers/offers-slice';
 import * as FavoritesActions from '@app/features/favorites/favorites-slice';
+import * as UserActions from '@app/features/user/user-slice';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { AppState } from '@app/store';
 import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
@@ -37,16 +38,25 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>) {
     this.offers$ = this.store.select(offersByCitySelector);
+    this.isAuth$ = this.store.select(UserActions.isAuthSelector);
   }
 
   offers$: Observable<Offer[]>;
   currentCity$ = new BehaviorSubject<Cities>(Cities.Paris);
   cityForMap = CityMap[Cities.Paris];
   activeOfferId: string | null = null;
+  isAuth$: Observable<AuthorizationStatus>;
 
   ngOnInit(): void {
+    this.store.dispatch(UserActions.checkAuth());
     this.store.dispatch(OffersActions.getOffers());
-    this.store.dispatch(FavoritesActions.getFavorites());
+
+    this.isAuth$.pipe(takeUntil(this.destroy$)).subscribe((status) => {
+      if (status === AuthorizationStatus.Auth) {
+        this.store.dispatch(FavoritesActions.getFavorites());
+      }
+    });
+
     this.currentCity$.pipe(takeUntil(this.destroy$)).subscribe((city) => {
       this.cityForMap = CityMap[city];
     });
