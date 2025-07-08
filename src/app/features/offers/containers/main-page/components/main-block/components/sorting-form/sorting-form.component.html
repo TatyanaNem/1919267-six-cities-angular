@@ -1,0 +1,18 @@
+<form class="places__sorting" action="#" method="get">
+  <span class="places__sorting-caption">Sort by </span>
+  <span class="places__sorting-type" tabindex="0" (click)="setIsFormOpen()" (keyup.enter)="setIsFormOpen()">
+    {{selectedOption}}
+    <svg class="places__sorting-arrow" width="7" height="4" [style]="arrowStyle">
+      <use xlink:href="#icon-arrow-select"></use>
+    </svg>
+  </span>
+  <ul class="places__options places__options--custom" [class.places__options--opened]="isFormOpened">
+    @for (option of sortingOptionsList; track option; let i = $index) {
+    <li class="places__option" [class.places__option--active]="isHovered[i]" tabindex="0"
+      (click)="setSortingOption(option)" (keyup.enter)="setSortingOption(option)" (mouseenter)="isHovered[i] = true"
+      (mouseleave)="isHovered[i] = false">
+      {{ option }}
+    </li>
+    }
+  </ul>
+</form>

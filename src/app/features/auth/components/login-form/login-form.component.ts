@@ -3,8 +3,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { validatePassword } from './validators/validatePassword';
 import { validateEmail } from './validators/validateEmail';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { Credentials } from '../../models/user';
+import { AuthService } from '@app/features/auth/services';
+import { Credentials } from '@app/features/auth/models';
 
 @Component({
   selector: 'app-login-form',

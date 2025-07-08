@@ -1,0 +1,14 @@
+@if (reviews$ | async; as reviews) {
+<section class="offer__reviews reviews">
+  <h2 class="reviews__title">Reviews &middot; <span class="reviews__amount">{{reviews.length > 10 ?
+      `${reviewsToShow} of ${reviews.length}` : reviews.length}}</span></h2>
+  @if (reviews.length) {
+  <ul class="reviews__list">
+    @for (reviewItem of reviews; track reviewItem.id) {
+    <app-review-item [review]="reviewItem"></app-review-item>
+    }
+  </ul>
+  }
+  <app-review-form></app-review-form>
+</section>
+}

@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../../../store';
 
-export const selectFeature = (state: AppState) => state.offers;
+export const selectFeature = (state: AppState) => state.OFFERS_DATA;
 
 export const offersSelector = createSelector(
   selectFeature,
@@ -16,6 +16,7 @@ export const currentCitySelector = createSelector(
 export const offersByCitySelector = createSelector(
   offersSelector,
   currentCitySelector,
-  (allOffers, currentCity) =>
-    allOffers.filter((offer) => offer.city.name === currentCity)
+  (allOffers, currentCity) => {
+    return allOffers.filter((offer) => offer.city.name === currentCity);
+  }
 );

@@ -6,18 +6,22 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import * as L from 'leaflet';
-import { CityMap } from '../../../../shared/constants';
+import {
+  CityMap,
+  DEFAULT_CITY,
+  URL_MARKER_CURRENT,
+  URL_MARKER_DEFAULT,
+} from '@app/const';
 import { Offer } from '../../models/offer';
-import { Cities } from '../../../../shared/enums/cities.enum';
 
 const defaultCustomIcon = L.icon({
-  iconUrl: 'img/pin.svg',
+  iconUrl: URL_MARKER_DEFAULT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = L.icon({
-  iconUrl: 'img/pin-active.svg',
+  iconUrl: URL_MARKER_CURRENT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
@@ -29,7 +33,7 @@ const currentCustomIcon = L.icon({
 })
 export class MapComponent implements AfterViewInit, OnChanges {
   @Input() block: 'cities' | 'offer' = 'cities';
-  @Input() city = CityMap[Cities.Amsterdam];
+  @Input() city = CityMap[DEFAULT_CITY];
   @Input() offers: Offer[] = [];
   @Input() activeOfferId: string | null = null;
 

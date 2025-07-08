@@ -1,9 +1,0 @@
-<button
-  [class]="isFavorite ? `${block}__bookmark-button button ${block}__bookmark-button--active` : `${block}__bookmark-button button`"
-  type="button">
-  <svg [class]="block + '__bookmark-icon'" [attr.width]="bookmarkSize[size].width"
-    [attr.height]="bookmarkSize[size].height">
-    <use xlink:href="#icon-bookmark"></use>
-  </svg>
-  <span class="visually-hidden">{{isFavorite ? 'In bookmarks' : 'To bookmarks'}}</span>
-</button>

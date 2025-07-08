@@ -1,4 +1,4 @@
-import { Cities } from '../../../shared/enums/cities.enum';
+import { Cities } from '@app/const';
 import { Location } from './location';
 
 export interface City {

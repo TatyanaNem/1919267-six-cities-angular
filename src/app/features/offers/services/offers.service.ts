@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
+import { Observable, timeout } from 'rxjs';
 import { Offer } from '../models/offer';
-import { offers } from '../mocks/offers';
+import { HttpClient } from '@angular/common/http';
+import { APIRoute, BACKEND_URL, REQUEST_TIMEOUT } from '@app/const';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OffersService {
+  constructor(private http: HttpClient) {}
   getOffers(): Observable<Offer[]> {
-    return of(offers).pipe(delay(2000));
+    return this.http
+      .get<Offer[]>(`${BACKEND_URL}${APIRoute.Offers}`)
+      .pipe(timeout(REQUEST_TIMEOUT));
   }
 }

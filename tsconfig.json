@@ -16,7 +16,88 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022"
+    "module": "ES2022",
+    "baseUrl": ".",
+    "paths": {
+      "@app/shared/components": ["./src/app/shared/components/index.ts"],
+      "@app/shared/utils": ["./src/app/shared/utils/index.ts"],
+      "@app/shared/pipes": ["./src/app/shared/pipes/index.ts"],
+      "@app/shared/types": ["./src/app/shared/types/index.ts"],
+      "@app/const": ["./src/app/app.const.ts"],
+
+      "@app/core/layout": ["./src/app/core/layout/index.ts"],
+      "@app/core/containers/not-found-page/components": [
+        "./src/app/core/containers/not-found-page/components/index.ts"
+      ],
+
+      "@app/store": ["./src/app/store/index.ts"],
+
+      "@app/features/auth/components": [
+        "src/app/features/auth/components/index.ts"
+      ],
+      "@app/features/auth/containers": [
+        "./src/app/features/auth/containers/index.ts"
+      ],
+      "@app/features/auth/guards": ["./src/app/features/auth/guards/index.ts"],
+      "@app/features/auth/models": ["./src/app/features/auth/models/index.ts"],
+      "@app/features/auth/services": [
+        "./src/app/features/auth/services/index.ts"
+      ],
+      "@app/features/offers/components": [
+        "./src/app/features/offers/components/index.ts"
+      ],
+      "@app/features/offers/containers": [
+        "./src/app/features/offers/containers/index.ts"
+      ],
+      "@app/features/offers/containers/offer-details-page/components": [
+        "src/app/features/offer/containers/offer-details-page/components/index.ts"
+      ],
+      "@app/features/offers/models": [
+        "./src/app/features/offers/models/index.ts"
+      ],
+      "@app/features/offers/services": [
+        "./src/app/features/offers/services/index.ts"
+      ],
+      "@app/features/offers/offers-slice": [
+        "./src/app/features/offers/offers-slice/index.ts"
+      ],
+      "@app/core/containers/not-found-page": [
+        "./src/app/core/containers/not-found-page/index.ts"
+      ],
+      "@app/features/favorites/containers": [
+        "./src/app/features/favorites/containers/index.ts"
+      ],
+      "@app/features/favorites/favorites-slice": [
+        "./src/app/features/favorites/favorites-slice/index.ts"
+      ],
+      "@app/features/favorites/services": [
+        "./src/app/features/offer/services/index.ts"
+      ],
+      "@app/features/offer/containers": [
+        "./src/app/features/offer/containers/index.ts"
+      ],
+      "@app/features/offer/offer-slice": [
+        "./src/app/features/offer/offer-slice/index.ts"
+      ],
+      "@app/features/offer/services": [
+        "./src/app/features/offer/services/index.ts"
+      ],
+      "@app/features/reviews/components": [
+        "./src/app/features/reviews/components/index.ts"
+      ],
+      "@app/features/reviews/containers": [
+        "./src/app/features/reviews/containers/index.ts"
+      ],
+      "@app/features/reviews/models": [
+        "src/app/features/reviews/models/index.ts"
+      ],
+      "@app/features/reviews/services": [
+        "./src/app/features/reviews/services/index.ts"
+      ],
+      "@app/features/reviews/reviews-slice": [
+        "./src/app/features/reviews/reviews-slice/index.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
