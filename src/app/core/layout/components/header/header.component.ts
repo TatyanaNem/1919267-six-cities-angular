@@ -8,8 +8,8 @@ import { selectFavorites } from '../../../../features/favorites/favorites-slice/
 import { AppState } from '@app/store';
 import { AsyncPipe } from '@angular/common';
 import { User } from '@app/features/user/models';
-import { UserService } from '@app/features/user/services';
-import { AppRoute } from '@app/const';
+import { AppRoute, AuthorizationStatus } from '@app/const';
+import { isAuthSelector } from '@app/features/user/user-slice';
 
 @Component({
   selector: 'app-header',
@@ -19,30 +19,21 @@ import { AppRoute } from '@app/const';
 export class HeaderComponent implements OnDestroy {
   public favoritesCount$: Observable<number>;
   public user!: User | null;
-  private subscription = new Subscription();
+  private subscription!: Subscription;
   public isLoginPage = false;
+  isAuth$: Observable<AuthorizationStatus>;
 
-  constructor(
-    private store: Store<AppState>,
-    private userService: UserService,
-    private route: ActivatedRoute
-  ) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+    this.isAuth$ = this.store.select(isAuthSelector);
+
     this.favoritesCount$ = this.store
       .select(selectFavorites)
       .pipe(map((favorites) => favorites.length));
 
-    this.subscription.add(
-      this.userService.user$.subscribe((user) => {
-        this.user = user;
-      })
-    );
-
-    this.subscription.add(
-      this.route.url.subscribe((segments) => {
-        const path = segments.map((segment) => segment.path).join('/');
-        this.isLoginPage = path === AppRoute.Login;
-      })
-    );
+    this.subscription = this.route.url.subscribe((segments) => {
+      const path = segments.map((segment) => segment.path).join('/');
+      this.isLoginPage = path === AppRoute.Login;
+    });
   }
 
   ngOnDestroy(): void {

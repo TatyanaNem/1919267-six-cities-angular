@@ -31,5 +31,26 @@ export const reducer = createReducer(
     ...state,
     user: null,
     authorizationStatus: AuthorizationStatus.NoAuth,
+  })),
+  on(UserActions.checkAuth, (state) => ({
+    ...state,
+    user: null,
+    authorizationStatus: AuthorizationStatus.Unknown,
+  })),
+  on(UserActions.login, (state) => ({
+    ...state,
+    loginSendingStatus: RequestStatus.Loading,
+  })),
+  on(UserActions.loginSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    authorizationStatus: AuthorizationStatus.Auth,
+    loginSendingStatus: RequestStatus.Success,
+  })),
+  on(UserActions.loginFailure, (state) => ({
+    ...state,
+    user: null,
+    authorizationStatus: AuthorizationStatus.NoAuth,
+    loginSendingStatus: RequestStatus.Error,
   }))
 );

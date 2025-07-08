@@ -6,7 +6,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const token = inject(JWTService).getToken();
 
   const authReq = req.clone({
-    headers: req.headers.set('Authorization', token),
+    headers: req.headers.set('X-Token', token),
   });
 
   return next(authReq);

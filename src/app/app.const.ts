@@ -52,7 +52,7 @@ enum APIRoute {
   Favorite = '/favorite',
 }
 
-const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities';
+const BACKEND_URL = 'https://16.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
 enum RequestStatus {

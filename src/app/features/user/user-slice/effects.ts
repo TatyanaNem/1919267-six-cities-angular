@@ -4,7 +4,8 @@ import { of } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { AuthService } from '../services';
 import * as UserActions from './actions';
-import { User } from '../models';
+import { Credentials, User } from '../models';
+import { JWTService } from 'src/app/core/services/jwt.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserEffects {
@@ -17,6 +18,28 @@ export class UserEffects {
             map((user: User) => UserActions.checkAuthSuccess({ user })),
             catchError((error) =>
               of(UserActions.checkAuthFailure({ error: error.message }))
+            )
+          );
+        })
+      )
+  );
+
+  login$ = createEffect(
+    (
+      actions$ = inject(Actions),
+      authService = inject(AuthService),
+      jwtService = inject(JWTService)
+    ) =>
+      actions$.pipe(
+        ofType(UserActions.login),
+        mergeMap((loginData: Credentials) => {
+          return authService.login(loginData).pipe(
+            map((user: User) => {
+              jwtService.setToken(user.token);
+              return UserActions.loginSuccess({ user });
+            }),
+            catchError((error) =>
+              of(UserActions.loginFailure({ error: error.message }))
             )
           );
         })

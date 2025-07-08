@@ -15,12 +15,11 @@ import { Store } from '@ngrx/store';
 import * as OffersActions from '@app/features/offers/offers-slice';
 import * as FavoritesActions from '@app/features/favorites/favorites-slice';
 import * as UserActions from '@app/features/user/user-slice/actions';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, filter, Observable, Subject, takeUntil } from 'rxjs';
 import { AppState } from '@app/store';
 import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
 import { offersByCitySelector } from '@app/features/offers/offers-slice';
 import { isAuthSelector } from '@app/features/user/user-slice';
-import { UserService } from '@app/features/user/services';
 
 @Component({
   selector: 'app-main-page',
@@ -38,10 +37,7 @@ import { UserService } from '@app/features/user/services';
 export class MainPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private store: Store<AppState>,
-    private userService: UserService
-  ) {
+  constructor(private store: Store<AppState>) {
     this.offers$ = this.store.select(offersByCitySelector);
     this.isAuth$ = this.store.select(isAuthSelector);
   }
@@ -55,10 +51,16 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(UserActions.checkAuth());
     this.store.dispatch(OffersActions.getOffers());
+    this.isAuth$ = this.store.select(isAuthSelector);
 
-    if (this.userService.isAuthorized$) {
-      this.store.dispatch(FavoritesActions.getFavorites());
-    }
+    this.isAuth$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(
+          (status: AuthorizationStatus) => status === AuthorizationStatus.Auth
+        )
+      )
+      .subscribe(() => this.store.dispatch(FavoritesActions.getFavorites()));
 
     this.currentCity$.pipe(takeUntil(this.destroy$)).subscribe((city) => {
       this.cityForMap = CityMap[city];

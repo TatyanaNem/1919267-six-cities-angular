@@ -4,7 +4,12 @@ import { validatePassword } from './validators/validatePassword';
 import { validateEmail } from './validators/validateEmail';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services';
-import { Credentials } from '../../models';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/store';
+import * as UserActions from '@app/features/user/user-slice/actions';
+import { filter, Observable, tap } from 'rxjs';
+import { RequestStatus } from '@app/const';
+import { loginSendingStatus } from '../../user-slice';
 
 @Component({
   selector: 'app-login-form',
@@ -16,26 +21,40 @@ export class LoginFormComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private store: Store<AppState>
+  ) {
+    this.loginSendingStatus$ = this.store.select(loginSendingStatus);
+  }
   private fb = inject(FormBuilder);
+  loginSendingStatus$: Observable<RequestStatus>;
 
   loginForm = this.fb.group({
-    email: this.fb.control('', [Validators.required, validateEmail]),
-    password: this.fb.control('', [Validators.required, validatePassword]),
+    email: this.fb.control<string>('', [Validators.required, validateEmail]),
+    password: this.fb.control<string>('', [
+      Validators.required,
+      validatePassword,
+    ]),
   });
-
-  private loginData = {
-    email: '',
-    password: '',
-  };
 
   backToPreviousPage() {
     this.router.navigateByUrl(this.authService.redirectUrl);
   }
 
   onSubmit(): void {
-    this.loginData = this.loginForm.value as Credentials;
-    this.backToPreviousPage();
+    const formValues = this.loginForm.value;
+    console.log(formValues);
+    this.store.dispatch(
+      UserActions.login({
+        email: formValues.email!,
+        password: formValues.password!,
+      })
+    );
+    this.loginSendingStatus$
+      .pipe(
+        filter((status: RequestStatus) => status === RequestStatus.Success),
+        tap(() => this.backToPreviousPage())
+      )
+      .subscribe();
   }
 }

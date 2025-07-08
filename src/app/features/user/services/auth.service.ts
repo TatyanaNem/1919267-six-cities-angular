@@ -1,13 +1,9 @@
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  APIRoute,
-  AuthorizationStatus,
-  BACKEND_URL,
-  REQUEST_TIMEOUT,
-} from '@app/const';
+import { APIRoute, BACKEND_URL, REQUEST_TIMEOUT } from '@app/const';
 import { Observable, timeout } from 'rxjs';
+import { Credentials } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +11,17 @@ import { Observable, timeout } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  isAuth = AuthorizationStatus.Unknown;
   redirectUrl = '/';
 
   checkAuth(): Observable<User> {
     return this.http
       .get<User>(`${BACKEND_URL}${APIRoute.Login}`)
+      .pipe(timeout(REQUEST_TIMEOUT));
+  }
+
+  login({ email, password }: Credentials): Observable<User> {
+    return this.http
+      .post<User>(`${BACKEND_URL}${APIRoute.Login}`, { email, password })
       .pipe(timeout(REQUEST_TIMEOUT));
   }
 }
