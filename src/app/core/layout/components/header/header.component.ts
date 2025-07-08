@@ -10,6 +10,7 @@ import { AsyncPipe } from '@angular/common';
 import { User } from '@app/features/user/models';
 import { AppRoute, AuthorizationStatus } from '@app/const';
 import { isAuthSelector } from '@app/features/user/user-slice';
+import * as UserActions from '@app/features/user/user-slice/actions';
 
 @Component({
   selector: 'app-header',
@@ -21,10 +22,12 @@ export class HeaderComponent implements OnDestroy {
   public user!: User | null;
   private subscription!: Subscription;
   public isLoginPage = false;
-  isAuth$: Observable<AuthorizationStatus>;
+  isAuth$: Observable<boolean>;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
-    this.isAuth$ = this.store.select(isAuthSelector);
+    this.isAuth$ = this.store
+      .select(isAuthSelector)
+      .pipe(map((status) => status === AuthorizationStatus.Auth));
 
     this.favoritesCount$ = this.store
       .select(selectFavorites)
@@ -38,5 +41,9 @@ export class HeaderComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  logoutHandler() {
+    this.store.dispatch(UserActions.logout());
   }
 }

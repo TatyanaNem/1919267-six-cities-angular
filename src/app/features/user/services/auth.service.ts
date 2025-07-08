@@ -24,4 +24,10 @@ export class AuthService {
       .post<User>(`${BACKEND_URL}${APIRoute.Login}`, { email, password })
       .pipe(timeout(REQUEST_TIMEOUT));
   }
+
+  logout(): Observable<void> {
+    return this.http
+      .delete<void>(`${BACKEND_URL}${APIRoute.Logout}`)
+      .pipe(timeout(REQUEST_TIMEOUT));
+  }
 }

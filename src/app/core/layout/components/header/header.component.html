@@ -7,9 +7,8 @@
       @if (!isLoginPage) {
       <nav class="header__nav">
         <ul class="header__nav-list">
-          @if (isAuth$ | async; as isAuth) {
           <li class="header__nav-item user">
-            @if (isAuth) {
+            @if (isAuth$ | async) {
             <a class="header__nav-link header__nav-link--profile" [routerLink]="['/favorites']">
               <div class="header__avatar-wrapper user__avatar-wrapper">
               </div>
@@ -23,13 +22,12 @@
             </a>
             }
           </li>
-          @if (isAuth) {
+          @if (isAuth$ | async) {
           <li class="header__nav-item">
-            <a class="header__nav-link" href="#">
+            <a class="header__nav-link" (click)="logoutHandler()" (keyup.enter)="logoutHandler()" tabindex="0">
               <span class="header__signout">Sign out</span>
             </a>
           </li>
-          }
           }
         </ul>
       </nav>

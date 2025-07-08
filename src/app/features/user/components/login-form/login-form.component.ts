@@ -43,7 +43,6 @@ export class LoginFormComponent {
 
   onSubmit(): void {
     const formValues = this.loginForm.value;
-    console.log(formValues);
     this.store.dispatch(
       UserActions.login({
         email: formValues.email!,

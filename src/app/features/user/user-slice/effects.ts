@@ -45,4 +45,26 @@ export class UserEffects {
         })
       )
   );
+
+  logout$ = createEffect(
+    (
+      actions$ = inject(Actions),
+      authService = inject(AuthService),
+      jwtService = inject(JWTService)
+    ) =>
+      actions$.pipe(
+        ofType(UserActions.logout),
+        mergeMap(() => {
+          return authService.logout().pipe(
+            map(() => {
+              jwtService.dropToken();
+              return UserActions.logoutSuccess();
+            }),
+            catchError((error) =>
+              of(UserActions.logoutFailure({ error: error.message }))
+            )
+          );
+        })
+      )
+  );
 }

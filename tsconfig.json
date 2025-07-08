@@ -39,7 +39,7 @@
       "@app/features/user/containers": [
         "./src/app/features/user/containers/index.ts"
       ],
-      "@app/features/user/guards": ["./src/app/features/user/guards/index.ts"],
+      "@app/features/user/guards": ["src/app/features/user/guards/index.ts"],
       "@app/features/user/models": ["./src/app/features/user/models/index.ts"],
       "@app/features/user/services": [
         "./src/app/features/user/services/index.ts"
