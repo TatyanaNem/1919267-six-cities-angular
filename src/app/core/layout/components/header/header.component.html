@@ -4,23 +4,35 @@
       <div class="header__left">
         <app-logo></app-logo>
       </div>
+      @if (!isLoginPage) {
       <nav class="header__nav">
         <ul class="header__nav-list">
           <li class="header__nav-item user">
+            @if (user) {
             <a class="header__nav-link header__nav-link--profile" [routerLink]="['/favorites']">
               <div class="header__avatar-wrapper user__avatar-wrapper">
               </div>
               <span class="header__user-name user__name">Oliver.Conner</span>
               <span class="header__favorite-count">{{favoritesCount$ | async}}</span>
             </a>
+            } @else {
+            <a [routerLink]="['/login']" class="header__nav-link header__nav-link--profile">
+              <div class="header__avatar-wrapper user__avatar-wrapper"></div>
+              <span class="header__login">Sign in</span>
+            </a>
+            }
           </li>
+          @if (user) {
           <li class="header__nav-item">
             <a class="header__nav-link" href="#">
               <span class="header__signout">Sign out</span>
             </a>
           </li>
+          }
         </ul>
       </nav>
+      }
+
     </div>
   </div>
 </header>

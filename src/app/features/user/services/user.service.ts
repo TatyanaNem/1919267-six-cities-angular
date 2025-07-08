@@ -1,26 +1,18 @@
-import { User } from './../models/user';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  APIRoute,
-  AuthorizationStatus,
-  BACKEND_URL,
-  REQUEST_TIMEOUT,
-} from '@app/const';
-import { Observable, timeout } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map } from 'rxjs';
+import { User } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  private userSubject = new BehaviorSubject<User | null>(null);
 
-  isAuth = AuthorizationStatus.Unknown;
-  redirectUrl = '/';
+  public user$ = this.userSubject.asObservable().pipe(distinctUntilChanged());
 
-  checkAuth(): Observable<User> {
-    return this.http
-      .get<User>(`${BACKEND_URL}${APIRoute.Login}`)
-      .pipe(timeout(REQUEST_TIMEOUT));
+  public isAuthorized$ = this.user$.pipe(map((user) => !!user));
+
+  setUser(user: User | null) {
+    this.userSubject.next(user);
   }
 }

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '../models';
+import { User } from '../../models';
 
 export const checkAuth = createAction('[Main Offers Page] Check Auth');
 export const checkAuthSuccess = createAction(

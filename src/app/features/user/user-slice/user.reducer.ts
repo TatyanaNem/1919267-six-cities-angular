@@ -26,5 +26,10 @@ export const reducer = createReducer(
     ...state,
     user: action.user,
     authorizationStatus: AuthorizationStatus.Auth,
+  })),
+  on(UserActions.checkAuthFailure, (state) => ({
+    ...state,
+    user: null,
+    authorizationStatus: AuthorizationStatus.NoAuth,
   }))
 );

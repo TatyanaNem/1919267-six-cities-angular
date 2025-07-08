@@ -47,6 +47,9 @@
       "@app/features/user/user-slice": [
         "./src/app/features/user/user-slice/index.ts"
       ],
+      "@app/features/user/user-slice/actions": [
+        "./src/app/features/user/user-slice/actions/index.ts"
+      ],
 
       "@app/features/offers/components": [
         "./src/app/features/offers/components/index.ts"
