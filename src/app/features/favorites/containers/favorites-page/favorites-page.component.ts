@@ -1,13 +1,18 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Offer } from '@app/features/offers/models';
 import { LayoutComponent } from '@app/core/layout';
 import { groupOffersByLocation } from '@app/shared/utils';
 import { OfferCardComponent } from '@app/shared/components';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/store';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { selectFavorites } from '@app/features/favorites/favorites-slice';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-favorites-page',
@@ -15,11 +20,14 @@ import { Observable, of } from 'rxjs';
   templateUrl: './favorites-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FavoritesPageComponent implements OnInit {
+export class FavoritesPageComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>) {
-    this.favorites$ = this.store.select(selectFavorites);
+    this.favorites$ = this.store
+      .select(selectFavorites)
+      .pipe(takeUntil(this._destroy$));
   }
 
+  private readonly _destroy$ = new Subject<void>();
   favoritesByCity: [string, Offer[]][] = [];
   favorites$: Observable<Offer[]>;
 
@@ -36,5 +44,10 @@ export class FavoritesPageComponent implements OnInit {
       .subscribe((groupedFavorites: Record<string, Offer[]>) => {
         this.favoritesByCity = Object.entries(groupedFavorites);
       });
+  }
+
+  ngOnDestroy() {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }

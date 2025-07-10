@@ -35,7 +35,7 @@ import { isAuthSelector } from '@app/features/user/user-slice';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+  private readonly _destroy$ = new Subject<void>();
 
   constructor(private store: Store<AppState>) {
     this.offers$ = this.store.select(offersByCitySelector);
@@ -55,14 +55,14 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
     this.isAuth$
       .pipe(
-        takeUntil(this.destroy$),
+        takeUntil(this._destroy$),
         filter(
           (status: AuthorizationStatus) => status === AuthorizationStatus.Auth
         )
       )
       .subscribe(() => this.store.dispatch(FavoritesActions.getFavorites()));
 
-    this.currentCity$.pipe(takeUntil(this.destroy$)).subscribe((city) => {
+    this.currentCity$.pipe(takeUntil(this._destroy$)).subscribe((city) => {
       this.cityForMap = CityMap[city];
     });
   }
@@ -77,7 +77,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }

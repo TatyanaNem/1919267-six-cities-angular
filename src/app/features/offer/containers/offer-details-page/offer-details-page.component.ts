@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Offer } from '@app/features/offers/models';
 import { GetRatingPipe } from '@app/shared/pipes';
@@ -22,7 +22,9 @@ import {
   Observable,
   of,
   shareReplay,
+  Subject,
   switchMap,
+  takeUntil,
 } from 'rxjs';
 import { ReviewsBlockComponent } from '@app/features/reviews/containers';
 import { Store } from '@ngrx/store';
@@ -48,18 +50,21 @@ import { selectNearbyOffers } from '../../offer-slice';
   ],
   templateUrl: './offer-details-page.component.html',
 })
-export class OfferDetailsPageComponent implements OnInit {
+export class OfferDetailsPageComponent implements OnInit, OnDestroy {
   offerId = '';
   currentOffer$: Observable<Offer> = EMPTY;
   combinedOffers$: Observable<Offer[]> = EMPTY;
   nearbyOffers$: Observable<Offer[]>;
+  private readonly _destroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
     private offerService: OfferService,
     private store: Store<AppState>
   ) {
-    this.nearbyOffers$ = this.store.select(selectNearbyOffers);
+    this.nearbyOffers$ = this.store
+      .select(selectNearbyOffers)
+      .pipe(takeUntil(this._destroy$));
   }
 
   ngOnInit(): void {
@@ -83,10 +88,16 @@ export class OfferDetailsPageComponent implements OnInit {
           }
           return allOffers;
         }),
-        shareReplay(1)
+        shareReplay(1),
+        takeUntil(this._destroy$)
       )
       .subscribe((offers) => {
         this.combinedOffers$ = of(offers);
       });
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }
