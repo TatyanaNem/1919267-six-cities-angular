@@ -14,7 +14,6 @@ import {
   BookmarkButtonComponent,
   PremiumMarkComponent,
 } from '@app/shared/components';
-import { OfferService } from '../../services';
 import {
   combineLatest,
   EMPTY,
@@ -22,7 +21,6 @@ import {
   map,
   Observable,
   Subscription,
-  switchMap,
 } from 'rxjs';
 import { ReviewsBlockComponent } from '@app/features/reviews/containers';
 import { Store } from '@ngrx/store';
@@ -66,11 +64,7 @@ export class OfferDetailsPageComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
 
-  constructor(
-    private route: ActivatedRoute,
-    private offerService: OfferService,
-    private store: Store<AppState>
-  ) {
+  constructor(private route: ActivatedRoute, private store: Store<AppState>) {
     this.currentOffer$ = this.store.select(selectActiveOffer);
     this.nearbyOffers$ = this.store.select(selectNearbyOffers);
     this.isLoading$ = this.store.select(selectIsLoading);
@@ -95,19 +89,13 @@ export class OfferDetailsPageComponent implements OnInit, OnDestroy {
     this.subscription = this.route.paramMap
       .pipe(
         filter((params) => !!params.get('offerId')), // Фильтруем пустые id
-        switchMap((params) => {
-          this.offerId = params.get('offerId') ?? '';
-          return [
-            this.store.dispatch(
-              OfferActions.getActiveOffer({ id: this.offerId })
-            ),
-            this.store.dispatch(
-              OfferActions.getNearbyOffers({ id: this.offerId })
-            ),
-          ];
-        })
+        map((params) => params.get('offerId') ?? '')
       )
-      .subscribe();
+      .subscribe((offerId) => {
+        this.offerId = offerId;
+        this.store.dispatch(OfferActions.getActiveOffer({ id: offerId }));
+        this.store.dispatch(OfferActions.getNearbyOffers({ id: offerId }));
+      });
   }
 
   ngOnDestroy(): void {
