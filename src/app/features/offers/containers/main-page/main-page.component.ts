@@ -18,8 +18,12 @@ import * as UserActions from '@app/features/user/user-slice/actions';
 import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
 import { AppState } from '@app/store';
 import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
-import { offersByCitySelector } from '@app/features/offers/offers-slice';
+import {
+  offersByCitySelector,
+  selectIsLoading,
+} from '@app/features/offers/offers-slice';
 import { isAuthSelector } from '@app/features/user/user-slice';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-main-page',
@@ -30,6 +34,7 @@ import { isAuthSelector } from '@app/features/user/user-slice';
     MainBlockComponent,
     MainBlockEmptyComponent,
     MapComponent,
+    LoaderComponent,
   ],
   templateUrl: './main-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,12 +45,14 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public cityForMap = CityMap[Cities.Paris];
   public activeOfferId: string | null = null;
   public isAuth$: Observable<AuthorizationStatus>;
+  public isLoading$: Observable<boolean>;
 
   private subscription = new Subscription();
 
   constructor(private store: Store<AppState>) {
     this.offers$ = this.store.select(offersByCitySelector);
     this.isAuth$ = this.store.select(isAuthSelector);
+    this.isLoading$ = this.store.select(selectIsLoading);
   }
 
   ngOnInit(): void {

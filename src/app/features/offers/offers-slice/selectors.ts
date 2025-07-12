@@ -20,3 +20,8 @@ export const offersByCitySelector = createSelector(
     return allOffers.filter((offer) => offer.city.name === currentCity);
   }
 );
+
+export const selectIsLoading = createSelector(
+  selectFeature,
+  (state) => state.isLoading
+);

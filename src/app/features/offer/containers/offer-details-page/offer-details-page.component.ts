@@ -18,17 +18,23 @@ import { OfferService } from '../../services';
 import {
   combineLatest,
   EMPTY,
+  filter,
   map,
   Observable,
-  of,
-  shareReplay,
   Subscription,
   switchMap,
 } from 'rxjs';
 import { ReviewsBlockComponent } from '@app/features/reviews/containers';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/store';
-import { selectActiveOffer, selectNearbyOffers } from '../../offer-slice';
+import {
+  selectActiveOffer,
+  selectIsLoading,
+  selectNearbyOffers,
+} from '../../offer-slice';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+import * as OfferActions from '../../offer-slice/actions';
+import { MAX_NEARBY_OFFERS_COUNT } from '@app/const';
 
 @Component({
   selector: 'app-offer-page',
@@ -46,6 +52,7 @@ import { selectActiveOffer, selectNearbyOffers } from '../../offer-slice';
     NearPlacesBlockComponent,
     MapComponent,
     NotFoundBlockComponent,
+    LoaderComponent,
   ],
   templateUrl: './offer-details-page.component.html',
 })
@@ -54,6 +61,8 @@ export class OfferDetailsPageComponent implements OnInit, OnDestroy {
   public currentOffer$: Observable<Offer | null>;
   public combinedOffers$: Observable<Offer[]> = EMPTY;
   public nearbyOffers$: Observable<Offer[]>;
+  public isLoading$: Observable<boolean>;
+  public offersForMap$: Observable<Offer[]>;
 
   private subscription = new Subscription();
 
@@ -64,34 +73,41 @@ export class OfferDetailsPageComponent implements OnInit, OnDestroy {
   ) {
     this.currentOffer$ = this.store.select(selectActiveOffer);
     this.nearbyOffers$ = this.store.select(selectNearbyOffers);
+    this.isLoading$ = this.store.select(selectIsLoading);
+    this.offersForMap$ = combineLatest([
+      this.currentOffer$,
+      this.nearbyOffers$.pipe(
+        map((nearby) => nearby.slice(0, MAX_NEARBY_OFFERS_COUNT))
+      ),
+    ]).pipe(
+      map(([currentOffer, nearbyOffers]) => {
+        let finalList = [];
+        if (currentOffer) {
+          finalList.push(currentOffer);
+        }
+        finalList = finalList.concat(nearbyOffers);
+        return finalList;
+      })
+    );
   }
 
   ngOnInit(): void {
     this.subscription = this.route.paramMap
       .pipe(
+        filter((params) => !!params.get('offerId')), // Фильтруем пустые id
         switchMap((params) => {
-          this.offerId = params.get('offerId') || ''; // Получаем offerId из маршрута
-          return combineLatest([
-            (this.nearbyOffers$ = this.offerService.getNearbyOffers(
-              this.offerId
-            )),
-            (this.currentOffer$ = this.offerService.getActiveOffer(
-              this.offerId
-            )),
-          ]);
-        }),
-        map(([nearbyOffers, activeOffer]) => {
-          const allOffers = [...nearbyOffers];
-          if (activeOffer) {
-            allOffers.push(activeOffer);
-          }
-          return allOffers;
-        }),
-        shareReplay(1)
+          this.offerId = params.get('offerId') ?? '';
+          return [
+            this.store.dispatch(
+              OfferActions.getActiveOffer({ id: this.offerId })
+            ),
+            this.store.dispatch(
+              OfferActions.getNearbyOffers({ id: this.offerId })
+            ),
+          ];
+        })
       )
-      .subscribe((offers) => {
-        this.combinedOffers$ = of(offers);
-      });
+      .subscribe();
   }
 
   ngOnDestroy(): void {

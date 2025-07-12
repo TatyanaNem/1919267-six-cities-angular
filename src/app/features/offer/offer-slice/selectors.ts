@@ -12,3 +12,8 @@ export const selectNearbyOffers = createSelector(
   selectFeature,
   (state) => state.nearByOffers
 );
+
+export const selectIsLoading = createSelector(
+  selectFeature,
+  (state) => state.isLoading
+);
