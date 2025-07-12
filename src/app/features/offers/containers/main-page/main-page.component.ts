@@ -24,6 +24,7 @@ import {
 } from '@app/features/offers/offers-slice';
 import { isAuthSelector } from '@app/features/user/user-slice';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-main-page',
@@ -49,7 +50,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private toastr: ToastrService) {
     this.offers$ = this.store.select(offersByCitySelector);
     this.isAuth$ = this.store.select(isAuthSelector);
     this.isLoading$ = this.store.select(selectIsLoading);
@@ -80,6 +81,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   onChangeCurrentCity(city: Cities) {
     this.store.dispatch(OffersActions.setCurrentCity({ city }));
     this.currentCity$.next(city);
+    console.log(this.toastr.success('SSSSS', 'SSSSSS'));
   }
 
   onChangeActiveId(id: string | null) {
