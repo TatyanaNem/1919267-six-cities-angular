@@ -18,8 +18,8 @@ import { sortReviewsByDate } from '@app/shared/utils';
 })
 export class ReviewsBlockComponent implements OnInit {
   @Input() offerId!: string;
-  reviews$: Observable<Review[]>;
-  readonly reviewsToShow = MAX_SHOWN_REVIEWS;
+  public reviews$: Observable<Review[]>;
+  public readonly reviewsToShow = MAX_SHOWN_REVIEWS;
 
   constructor(
     private store: Store<AppState>,

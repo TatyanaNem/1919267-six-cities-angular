@@ -8,12 +8,13 @@
       <nav class="header__nav">
         <ul class="header__nav-list">
           <li class="header__nav-item user">
-            @if (isAuth$ | async) {
+            @if (isAuth()) {
             <a class="header__nav-link header__nav-link--profile" [routerLink]="['/favorites']">
               <div class="header__avatar-wrapper user__avatar-wrapper">
+                <img class="header__avatar user__avatar" [src]="user()?.avatarUrl" alt="avatar" />
               </div>
-              <span class="header__user-name user__name">Oliver.Conner</span>
-              <span class="header__favorite-count">{{favoritesCount$ | async}}</span>
+              <span class="header__user-name user__name">{{user()?.email}}</span>
+              <span class="header__favorite-count">{{favoritesCount()}}</span>
             </a>
             } @else {
             <a [routerLink]="['/login']" class="header__nav-link header__nav-link--profile">
@@ -22,9 +23,9 @@
             </a>
             }
           </li>
-          @if (isAuth$ | async) {
+          @if (isAuth()) {
           <li class="header__nav-item">
-            <a class="header__nav-link" (click)="logoutHandler()" (keyup.enter)="logoutHandler()" tabindex="0">
+            <a class="header__nav-link" (click)="onLogout()" (keyup.enter)="onLogout()" tabindex="0">
               <span class="header__signout">Sign out</span>
             </a>
           </li>

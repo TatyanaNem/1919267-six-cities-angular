@@ -22,14 +22,13 @@ import {
   Observable,
   of,
   shareReplay,
-  Subject,
+  Subscription,
   switchMap,
-  takeUntil,
 } from 'rxjs';
 import { ReviewsBlockComponent } from '@app/features/reviews/containers';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/store';
-import { selectNearbyOffers } from '../../offer-slice';
+import { selectActiveOffer, selectNearbyOffers } from '../../offer-slice';
 
 @Component({
   selector: 'app-offer-page',
@@ -51,24 +50,24 @@ import { selectNearbyOffers } from '../../offer-slice';
   templateUrl: './offer-details-page.component.html',
 })
 export class OfferDetailsPageComponent implements OnInit, OnDestroy {
-  offerId = '';
-  currentOffer$: Observable<Offer> = EMPTY;
-  combinedOffers$: Observable<Offer[]> = EMPTY;
-  nearbyOffers$: Observable<Offer[]>;
-  private readonly _destroy$ = new Subject<void>();
+  public offerId = '';
+  public currentOffer$: Observable<Offer | null>;
+  public combinedOffers$: Observable<Offer[]> = EMPTY;
+  public nearbyOffers$: Observable<Offer[]>;
+
+  private subscription = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
     private offerService: OfferService,
     private store: Store<AppState>
   ) {
-    this.nearbyOffers$ = this.store
-      .select(selectNearbyOffers)
-      .pipe(takeUntil(this._destroy$));
+    this.currentOffer$ = this.store.select(selectActiveOffer);
+    this.nearbyOffers$ = this.store.select(selectNearbyOffers);
   }
 
   ngOnInit(): void {
-    this.route.paramMap
+    this.subscription = this.route.paramMap
       .pipe(
         switchMap((params) => {
           this.offerId = params.get('offerId') || ''; // Получаем offerId из маршрута
@@ -88,8 +87,7 @@ export class OfferDetailsPageComponent implements OnInit, OnDestroy {
           }
           return allOffers;
         }),
-        shareReplay(1),
-        takeUntil(this._destroy$)
+        shareReplay(1)
       )
       .subscribe((offers) => {
         this.combinedOffers$ = of(offers);
@@ -97,7 +95,6 @@ export class OfferDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._destroy$.next();
-    this._destroy$.complete();
+    this.subscription.unsubscribe();
   }
 }

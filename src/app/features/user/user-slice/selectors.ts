@@ -8,7 +8,9 @@ export const isAuthSelector = createSelector(
   (state) => state.authorizationStatus
 );
 
-export const loginSendingStatus = createSelector(
+export const selectSendingStatus = createSelector(
   selectFeature,
   (state) => state.loginSendingStatus
 );
+
+export const selectUser = createSelector(selectFeature, (state) => state.user);

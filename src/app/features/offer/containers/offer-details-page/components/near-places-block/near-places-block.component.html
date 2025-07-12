@@ -1,7 +1,7 @@
 <section class="near-places places">
   <h2 class="near-places__title">Other places in the neighbourhood</h2>
   <div class="near-places__list places__list">
-    @for (offer of nearbyOffers; track offer.id) {
+    @for (offer of displayedOffers(); track offer.id) {
     <app-offer-card [offer]="offer" [block]="'near-places'"></app-offer-card>
     }
   </div>

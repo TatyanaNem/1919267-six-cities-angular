@@ -9,7 +9,7 @@
         Email is required
       </p>
       }
-      @if (loginForm.get('email')?.touched && loginForm.controls.email.hasError('emailInvalid')) {
+      @if (loginForm.get('email')?.touched && loginForm.controls['email'].hasError('emailInvalid')) {
       <p class="error">
         The email is invalid
       </p>
@@ -27,7 +27,7 @@
         Password is required
       </span>
       }
-      @if (loginForm.controls.password.hasError('passwordInvalid')) {
+      @if (loginForm.controls['password'].hasError('passwordInvalid')) {
       <p class="error">
         The password must have at least one letter and one digit
       </p>
@@ -35,5 +35,5 @@
     </div>
 
   </div>
-  <button class="login__submit form__submit button" type="submit" [disabled]="!loginForm.valid">Sign in</button>
+  <button class="login__submit form__submit button" type="submit" [disabled]="loginForm.invalid">Sign in</button>
 </form>

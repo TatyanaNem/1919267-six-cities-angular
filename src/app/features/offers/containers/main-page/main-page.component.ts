@@ -15,7 +15,7 @@ import { Store } from '@ngrx/store';
 import * as OffersActions from '@app/features/offers/offers-slice';
 import * as FavoritesActions from '@app/features/favorites/favorites-slice';
 import * as UserActions from '@app/features/user/user-slice/actions';
-import { BehaviorSubject, filter, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
 import { AppState } from '@app/store';
 import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
 import { offersByCitySelector } from '@app/features/offers/offers-slice';
@@ -35,36 +35,39 @@ import { isAuthSelector } from '@app/features/user/user-slice';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent implements OnInit, OnDestroy {
-  private readonly _destroy$ = new Subject<void>();
+  public offers$: Observable<Offer[]>;
+  public currentCity$ = new BehaviorSubject<Cities>(Cities.Paris);
+  public cityForMap = CityMap[Cities.Paris];
+  public activeOfferId: string | null = null;
+  public isAuth$: Observable<AuthorizationStatus>;
+
+  private subscription = new Subscription();
 
   constructor(private store: Store<AppState>) {
     this.offers$ = this.store.select(offersByCitySelector);
     this.isAuth$ = this.store.select(isAuthSelector);
   }
 
-  offers$: Observable<Offer[]>;
-  currentCity$ = new BehaviorSubject<Cities>(Cities.Paris);
-  cityForMap = CityMap[Cities.Paris];
-  activeOfferId: string | null = null;
-  isAuth$: Observable<AuthorizationStatus>;
-
   ngOnInit(): void {
     this.store.dispatch(UserActions.checkAuth());
     this.store.dispatch(OffersActions.getOffers());
     this.isAuth$ = this.store.select(isAuthSelector);
 
-    this.isAuth$
-      .pipe(
-        takeUntil(this._destroy$),
-        filter(
-          (status: AuthorizationStatus) => status === AuthorizationStatus.Auth
+    this.subscription.add(
+      this.isAuth$
+        .pipe(
+          filter(
+            (status: AuthorizationStatus) => status === AuthorizationStatus.Auth
+          )
         )
-      )
-      .subscribe(() => this.store.dispatch(FavoritesActions.getFavorites()));
+        .subscribe(() => this.store.dispatch(FavoritesActions.getFavorites()))
+    );
 
-    this.currentCity$.pipe(takeUntil(this._destroy$)).subscribe((city) => {
-      this.cityForMap = CityMap[city];
-    });
+    this.subscription.add(
+      this.currentCity$.subscribe((city) => {
+        this.cityForMap = CityMap[city];
+      })
+    );
   }
 
   onChangeCurrentCity(city: Cities) {
@@ -77,7 +80,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._destroy$.next();
-    this._destroy$.complete();
+    this.subscription.unsubscribe();
   }
 }
