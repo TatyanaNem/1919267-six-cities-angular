@@ -11,7 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
   styleUrl: './layout.component.css',
 })
 export class LayoutComponent {
-  currentUrl = '';
+  public currentUrl = '';
 
   constructor(private router: ActivatedRoute) {
     const segments = this.router.snapshot.url;

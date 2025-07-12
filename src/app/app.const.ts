@@ -52,7 +52,7 @@ enum APIRoute {
   Favorite = '/favorite',
 }
 
-const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities';
+const BACKEND_URL = 'https://16.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
 enum RequestStatus {
@@ -70,15 +70,6 @@ enum NameSpace {
   FavoritesData = 'FAVORITES_DATA',
   NearbyOffersData = 'NEARBY_OFFERS_DATA',
 }
-
-const HttpStatus = {
-  Ok: 200,
-  Created: 201,
-  BadRequest: 400,
-  Unauthorized: 401,
-  Forbidden: 403,
-  NotFound: 404,
-} as const;
 
 const enum FavoriteStatus {
   Added = 1,
@@ -114,7 +105,6 @@ export {
   MAX_SHOWN_REVIEWS,
   RequestStatus,
   NameSpace,
-  HttpStatus,
   CityMap,
   FavoriteStatus,
   ACTION_TYPE_REDIRECT,

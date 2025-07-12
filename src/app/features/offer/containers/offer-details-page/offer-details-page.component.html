@@ -1,5 +1,8 @@
 <app-layout>
 
+  @if (isLoading$ | async) {
+  <app-loader></app-loader>
+  } @else {
   @if (currentOffer$ | async; as currentOffer) {
   <main class="page__main page__main--offer">
     <section class="offer">
@@ -60,7 +63,7 @@
           }
         </div>
       </div>
-      @if (combinedOffers$ | async; as combinedOffers) {
+      @if (offersForMap$ | async; as combinedOffers) {
       <app-map block="offer" [offers]="combinedOffers" [city]="currentOffer.city.location"
         [activeOfferId]="currentOffer.id">
       </app-map>
@@ -72,6 +75,8 @@
     </div>
     }
   </main>
-  } @else {<app-not-found-block [type]="'offer'"></app-not-found-block>}
+  }
+  @else {<app-not-found-block [type]="'offer'"></app-not-found-block>}
+  }
 
 </app-layout>

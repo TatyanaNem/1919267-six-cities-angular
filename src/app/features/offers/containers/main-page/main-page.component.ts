@@ -1,4 +1,4 @@
-import { Cities, CityMap } from '@app/const';
+import { AuthorizationStatus, Cities, CityMap } from '@app/const';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,10 +14,16 @@ import { MapComponent } from '@app/features/offers/components';
 import { Store } from '@ngrx/store';
 import * as OffersActions from '@app/features/offers/offers-slice';
 import * as FavoritesActions from '@app/features/favorites/favorites-slice';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import * as UserActions from '@app/features/user/user-slice/actions';
+import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
 import { AppState } from '@app/store';
 import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
-import { offersByCitySelector } from '@app/features/offers/offers-slice';
+import {
+  offersByCitySelector,
+  selectIsLoading,
+} from '@app/features/offers/offers-slice';
+import { isAuthSelector } from '@app/features/user/user-slice';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-main-page',
@@ -28,28 +34,47 @@ import { offersByCitySelector } from '@app/features/offers/offers-slice';
     MainBlockComponent,
     MainBlockEmptyComponent,
     MapComponent,
+    LoaderComponent,
   ],
   templateUrl: './main-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+  public offers$: Observable<Offer[]>;
+  public currentCity$ = new BehaviorSubject<Cities>(Cities.Paris);
+  public cityForMap = CityMap[Cities.Paris];
+  public activeOfferId: string | null = null;
+  public isAuth$: Observable<AuthorizationStatus>;
+  public isLoading$: Observable<boolean>;
+
+  private subscription = new Subscription();
 
   constructor(private store: Store<AppState>) {
     this.offers$ = this.store.select(offersByCitySelector);
+    this.isAuth$ = this.store.select(isAuthSelector);
+    this.isLoading$ = this.store.select(selectIsLoading);
   }
 
-  offers$: Observable<Offer[]>;
-  currentCity$ = new BehaviorSubject<Cities>(Cities.Paris);
-  cityForMap = CityMap[Cities.Paris];
-  activeOfferId: string | null = null;
-
   ngOnInit(): void {
+    this.store.dispatch(UserActions.checkAuth());
     this.store.dispatch(OffersActions.getOffers());
-    this.store.dispatch(FavoritesActions.getFavorites());
-    this.currentCity$.pipe(takeUntil(this.destroy$)).subscribe((city) => {
-      this.cityForMap = CityMap[city];
-    });
+    this.isAuth$ = this.store.select(isAuthSelector);
+
+    this.subscription.add(
+      this.isAuth$
+        .pipe(
+          filter(
+            (status: AuthorizationStatus) => status === AuthorizationStatus.Auth
+          )
+        )
+        .subscribe(() => this.store.dispatch(FavoritesActions.getFavorites()))
+    );
+
+    this.subscription.add(
+      this.currentCity$.subscribe((city) => {
+        this.cityForMap = CityMap[city];
+      })
+    );
   }
 
   onChangeCurrentCity(city: Cities) {
@@ -62,7 +87,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.subscription.unsubscribe();
   }
 }

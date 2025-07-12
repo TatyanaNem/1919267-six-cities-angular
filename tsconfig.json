@@ -29,20 +29,28 @@
       "@app/core/containers/not-found-page/components": [
         "./src/app/core/containers/not-found-page/components/index.ts"
       ],
+      "@app/core/interceptors": ["./src/app/core/interceptors/index.ts"],
 
       "@app/store": ["./src/app/store/index.ts"],
 
-      "@app/features/auth/components": [
-        "src/app/features/auth/components/index.ts"
+      "@app/features/user/components": [
+        "src/app/features/user/components/index.ts"
       ],
-      "@app/features/auth/containers": [
-        "./src/app/features/auth/containers/index.ts"
+      "@app/features/user/containers": [
+        "./src/app/features/user/containers/index.ts"
       ],
-      "@app/features/auth/guards": ["./src/app/features/auth/guards/index.ts"],
-      "@app/features/auth/models": ["./src/app/features/auth/models/index.ts"],
-      "@app/features/auth/services": [
-        "./src/app/features/auth/services/index.ts"
+      "@app/features/user/guards": ["src/app/features/user/guards/index.ts"],
+      "@app/features/user/models": ["./src/app/features/user/models/index.ts"],
+      "@app/features/user/services": [
+        "./src/app/features/user/services/index.ts"
       ],
+      "@app/features/user/user-slice": [
+        "./src/app/features/user/user-slice/index.ts"
+      ],
+      "@app/features/user/user-slice/actions": [
+        "./src/app/features/user/user-slice/actions/index.ts"
+      ],
+
       "@app/features/offers/components": [
         "./src/app/features/offers/components/index.ts"
       ],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Offer } from '@app/features/offers/models';
 import { GetRatingPipe } from '@app/shared/pipes';
@@ -14,20 +14,25 @@ import {
   BookmarkButtonComponent,
   PremiumMarkComponent,
 } from '@app/shared/components';
-import { OfferService } from '../../services';
 import {
   combineLatest,
   EMPTY,
+  filter,
   map,
   Observable,
-  of,
-  shareReplay,
-  switchMap,
+  Subscription,
 } from 'rxjs';
 import { ReviewsBlockComponent } from '@app/features/reviews/containers';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/store';
-import { selectNearbyOffers } from '../../offer-slice';
+import {
+  selectActiveOffer,
+  selectIsLoading,
+  selectNearbyOffers,
+} from '../../offer-slice';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+import * as OfferActions from '../../offer-slice/actions';
+import { MAX_NEARBY_OFFERS_COUNT } from '@app/const';
 
 @Component({
   selector: 'app-offer-page',
@@ -45,48 +50,55 @@ import { selectNearbyOffers } from '../../offer-slice';
     NearPlacesBlockComponent,
     MapComponent,
     NotFoundBlockComponent,
+    LoaderComponent,
   ],
   templateUrl: './offer-details-page.component.html',
 })
-export class OfferDetailsPageComponent implements OnInit {
-  offerId = '';
-  currentOffer$: Observable<Offer> = EMPTY;
-  combinedOffers$: Observable<Offer[]> = EMPTY;
-  nearbyOffers$: Observable<Offer[]>;
+export class OfferDetailsPageComponent implements OnInit, OnDestroy {
+  public offerId = '';
+  public currentOffer$: Observable<Offer | null>;
+  public combinedOffers$: Observable<Offer[]> = EMPTY;
+  public nearbyOffers$: Observable<Offer[]>;
+  public isLoading$: Observable<boolean>;
+  public offersForMap$: Observable<Offer[]>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private offerService: OfferService,
-    private store: Store<AppState>
-  ) {
+  private subscription = new Subscription();
+
+  constructor(private route: ActivatedRoute, private store: Store<AppState>) {
+    this.currentOffer$ = this.store.select(selectActiveOffer);
     this.nearbyOffers$ = this.store.select(selectNearbyOffers);
+    this.isLoading$ = this.store.select(selectIsLoading);
+    this.offersForMap$ = combineLatest([
+      this.currentOffer$,
+      this.nearbyOffers$.pipe(
+        map((nearby) => nearby.slice(0, MAX_NEARBY_OFFERS_COUNT))
+      ),
+    ]).pipe(
+      map(([currentOffer, nearbyOffers]) => {
+        let finalList = [];
+        if (currentOffer) {
+          finalList.push(currentOffer);
+        }
+        finalList = finalList.concat(nearbyOffers);
+        return finalList;
+      })
+    );
   }
 
   ngOnInit(): void {
-    this.route.paramMap
+    this.subscription = this.route.paramMap
       .pipe(
-        switchMap((params) => {
-          this.offerId = params.get('offerId') || ''; // Получаем offerId из маршрута
-          return combineLatest([
-            (this.nearbyOffers$ = this.offerService.getNearbyOffers(
-              this.offerId
-            )),
-            (this.currentOffer$ = this.offerService.getActiveOffer(
-              this.offerId
-            )),
-          ]);
-        }),
-        map(([nearbyOffers, activeOffer]) => {
-          const allOffers = [...nearbyOffers];
-          if (activeOffer) {
-            allOffers.push(activeOffer);
-          }
-          return allOffers;
-        }),
-        shareReplay(1)
+        filter((params) => !!params.get('offerId')), // Фильтруем пустые id
+        map((params) => params.get('offerId') ?? '')
       )
-      .subscribe((offers) => {
-        this.combinedOffers$ = of(offers);
+      .subscribe((offerId) => {
+        this.offerId = offerId;
+        this.store.dispatch(OfferActions.getActiveOffer({ id: offerId }));
+        this.store.dispatch(OfferActions.getNearbyOffers({ id: offerId }));
       });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainPageComponent } from '@app/features/offers/containers';
-import { AuthGuard } from '@app/features/auth/guards';
 import { AppRoute } from './app.const';
+import { AuthGuard } from './features/user/guards';
 
 export const routes: Routes = [
   {
@@ -29,7 +29,7 @@ export const routes: Routes = [
   {
     path: AppRoute.Login,
     loadComponent: () =>
-      import('./features/auth/containers/login-page/login-page.component').then(
+      import('./features/user/containers/login-page/login-page.component').then(
         (c) => c.LoginPageComponent
       ),
     title: 'Login page',

@@ -7,7 +7,9 @@
     <div class="cities">
       <div [class.cities__places-container--empty]="offers?.length === 0" class="cities__places-container container">
 
-        @if (offers && offers.length > 0) {
+        @if (isLoading$ | async; as isLoading) {
+        <app-loader></app-loader>
+        } @else if (offers && offers.length > 0) {
         <app-main-block [offers]="offers" [currentCity]="(currentCity$ | async)!"
           (changeActiveId)="onChangeActiveId($event)"></app-main-block>
         <div class="cities__right-section">
