@@ -6,7 +6,6 @@ import { Size } from '@app/shared/types';
 import { PremiumMarkComponent } from '../premium-mark/premium-mark.component';
 import { GetRatingPipe } from '@app/shared/pipes';
 import { Store } from '@ngrx/store';
-import * as OffersActions from '@app/features/offers/offers-slice';
 import * as FavoritesActions from '../../../features/favorites/favorites-slice/actions';
 import { BookmarkButtonComponent } from '../bookmark-button/bookmark-button.component';
 
@@ -34,10 +33,10 @@ export class OfferCardComponent {
 
   updateFavoriteStatus(status: boolean) {
     this.store.dispatch(
-      OffersActions.updateFavoriteStatus({ status, id: this.offer.id })
-    );
-    this.store.dispatch(
-      FavoritesActions.updateFavoriteStatus({ status, id: this.offer.id })
+      FavoritesActions.updateFavoriteStatus({
+        status: Number(status),
+        id: this.offer.id,
+      })
     );
   }
 }

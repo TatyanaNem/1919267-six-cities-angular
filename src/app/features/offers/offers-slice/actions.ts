@@ -15,7 +15,3 @@ export const setCurrentCity = createAction(
   '[Main Offers Page] Set Current City',
   props<{ city: Cities }>()
 );
-export const updateFavoriteStatus = createAction(
-  '[Offer] Update Favorite Status',
-  props<{ status: boolean; id: string }>()
-);
