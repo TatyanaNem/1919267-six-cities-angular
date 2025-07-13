@@ -12,7 +12,7 @@ import {
   URL_MARKER_CURRENT,
   URL_MARKER_DEFAULT,
 } from '@app/const';
-import { Offer } from '../../models/offer';
+import { Offer } from '@app/features/offers/models';
 
 const defaultCustomIcon = L.icon({
   iconUrl: URL_MARKER_DEFAULT,
@@ -64,8 +64,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
   private initMap(): void {
     this.map = L.map('map', {
       center: [this.city.latitude, this.city.longitude],
-
       zoom: 12,
+      scrollWheelZoom: false,
     });
 
     const tiles = L.tileLayer(

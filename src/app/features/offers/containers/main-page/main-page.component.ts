@@ -10,7 +10,7 @@ import { Offer } from '@app/features/offers/models';
 import { LayoutComponent } from '@app/core/layout';
 import { MainBlockEmptyComponent } from './components/main-block-empty/main-block-empty.component';
 import { MainBlockComponent } from './components/main-block/main-block.component';
-import { MapComponent } from '@app/features/offers/components';
+import { MapComponent } from '@app/shared/components';
 import { Store } from '@ngrx/store';
 import * as OffersActions from '@app/features/offers/offers-slice';
 import * as FavoritesActions from '@app/features/favorites/favorites-slice';

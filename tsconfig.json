@@ -50,10 +50,6 @@
       "@app/features/user/user-slice/actions": [
         "./src/app/features/user/user-slice/actions/index.ts"
       ],
-
-      "@app/features/offers/components": [
-        "./src/app/features/offers/components/index.ts"
-      ],
       "@app/features/offers/containers": [
         "./src/app/features/offers/containers/index.ts"
       ],

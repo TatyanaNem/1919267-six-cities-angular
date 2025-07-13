@@ -3,38 +3,46 @@ import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { JWTService } from '../services/jwt.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const jwtService = inject(JWTService);
   const toastr = inject(ToastrService);
+  const router = inject(Router);
+  const isMainRoute = router.url === '/';
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       let message = '';
 
       switch (error.status) {
-        case 401: // Not Authorized
+        case 401:
           jwtService.dropToken();
-          message = 'Вы не авторизованы!';
+          if (!isMainRoute) {
+            message = 'You are not authorized to access this resource.';
+            toastr.error(message);
+          }
           break;
 
-        case 403: // Forbidden
-          message = 'Нет доступа к данному ресурсу.';
+        case 403:
+          message = 'You are forbidden to access this resource.';
+          toastr.error(message);
           break;
 
-        case 404: // Resource not found
-          message = 'Запрашиваемый ресурс не найден.';
+        case 404:
+          message = 'The requested resource was not found.';
+          toastr.error(message);
           break;
 
-        case 500: // Internal Server Error
-          message = 'Произошла внутренняя ошибка сервера.';
+        case 500:
+          message = 'Internal Server Error has occurred.';
+          toastr.error(message);
           break;
 
         default:
-          message = `Что-то пошло не так! Код ошибки ${error.status}.`;
+          message = `Something went wrong! Error code is ${error.status}.`;
+          toastr.error(message);
       }
-
-      toastr.error(message);
       return throwError(() => error);
     })
   );
