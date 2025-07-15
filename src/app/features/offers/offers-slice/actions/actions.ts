@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Offer } from '../models/offer';
 import { Cities } from '@app/const';
+import { Offer } from '../../models';
 
 export const getOffers = createAction('[Main Offers Page] Get Offers');
 export const getOffersSuccess = createAction(

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Offer } from '@app/features/offers/models';
-import * as OffersActions from '../actions';
+import * as OffersActions from '../actions/actions';
 import { Cities } from '@app/const';
 import * as FavoritesActions from '@app/features/favorites/favorites-slice';
 
