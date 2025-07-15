@@ -101,8 +101,11 @@
       "@app/features/reviews/services": [
         "./src/app/features/reviews/services/index.ts"
       ],
-      "@app/features/reviews/reviews-slice": [
-        "./src/app/features/reviews/reviews-slice/index.ts"
+      "@app/features/reviews/reviews-slice/actions": [
+        "./src/app/features/reviews/reviews-slice/actions/index.ts"
+      ],
+      "@app/features/reviews/reviews-slice/selectors": [
+        "./src/app/features/reviews/reviews-slice/selectors/index.ts"
       ]
     }
   },

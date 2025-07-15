@@ -1,9 +1,9 @@
-<form class="reviews__form form" action="#" method="post" (ngSubmit)="onSubmit()" #reviewForm="ngForm">
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="reviews__form form" action="#" method="post">
   <label class="reviews__label form__label" for="review">Your review</label>
   <div class="reviews__rating-form form__rating">
     @for (item of ratingMap; track item.value) {
     <input class="form__rating-input visually-hidden" name="rating" [value]="item.value" [id]="`${item.value}-stars`"
-      type="radio" ngModel required>
+      type="radio" formControlName="rating">
     <label [for]="`${item.value}-stars`" class="reviews__rating-label form__rating-label" [title]="item.title">
       <svg class="form__star-image" width="37" height="33">
         <use xlink:href="#icon-star"></use>
@@ -12,14 +12,12 @@
     }
   </div>
   <textarea class="reviews__textarea form__textarea" id="review" name="review"
-    placeholder="Tell how was your stay, what you like and what can be improved" [(ngModel)]="reviewFormData.review"
-    minlength="50" required></textarea>
+    placeholder="Tell how was your stay, what you like and what can be improved" formControlName="comment"></textarea>
   <div class="reviews__button-wrapper">
     <p class="reviews__help">
       To submit review please make sure to set <span class="reviews__star">rating</span> and describe your
       stay with at least <b class="reviews__text-amount">50 characters</b>.
     </p>
-    <button class="reviews__submit form__submit button" type="submit" [disabled]="!reviewForm.valid"
-      (click)="reviewForm.reset({rating: 0, review: ''})">Submit</button>
+    <button class="reviews__submit form__submit button" type="submit" [disabled]="reviewForm.invalid">Submit</button>
   </div>
 </form>

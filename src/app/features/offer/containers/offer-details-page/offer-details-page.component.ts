@@ -14,14 +14,7 @@ import {
   BookmarkButtonComponent,
   PremiumMarkComponent,
 } from '@app/shared/components';
-import {
-  combineLatest,
-  EMPTY,
-  filter,
-  map,
-  Observable,
-  Subscription,
-} from 'rxjs';
+import { combineLatest, filter, map, Observable, Subscription } from 'rxjs';
 import { ReviewsBlockComponent } from '@app/features/reviews/containers';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/store';
@@ -64,7 +57,6 @@ import * as FavoritesActions from '@app/features/favorites/favorites-slice';
 export class OfferDetailsPageComponent implements OnInit, OnDestroy {
   public offerId = '';
   public currentOffer$: Observable<Offer | null>;
-  public combinedOffers$: Observable<Offer[]> = EMPTY;
   public nearbyOffers$: Observable<Offer[]>;
   public isLoading$: Observable<boolean>;
   public offersForMap$: Observable<Offer[]>;
