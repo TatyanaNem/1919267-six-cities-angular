@@ -1,7 +1,16 @@
 <app-layout>
-
-  <main class="page__main page__main--favorites">
+  @if (favoritesByCity$ | async; as favoritesByCity) {
+  <main class="page__main page__main--favorites" [class.page__main--favorites-empty]="!favoritesByCity.length">
     <div class="page__favorites-container container">
+      @if (favoritesByCity.length === 0) {
+      <section class="favorites favorites--empty">
+        <h1 class="visually-hidden">Favorites (empty)</h1>
+        <div class="favorites__status-wrapper">
+          <b class="favorites__status">Nothing yet saved.</b>
+          <p class="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+        </div>
+      </section>
+      } @else {
       <section class="favorites">
         <h1 class="favorites__title">Saved listing</h1>
         <ul class="favorites__list">
@@ -24,7 +33,11 @@
           }
         </ul>
       </section>
+      }
+
     </div>
   </main>
+  }
+
 
 </app-layout>

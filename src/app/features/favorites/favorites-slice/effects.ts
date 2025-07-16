@@ -24,4 +24,21 @@ export class FavoritesEffects {
         })
       )
   );
+
+  updateFavoriteStatus$ = createEffect(
+    (actions$ = inject(Actions), favoritesService = inject(FavoritesService)) =>
+      actions$.pipe(
+        ofType(FavoritesActions.updateFavoriteStatus),
+        mergeMap(({ id, status }) => {
+          return favoritesService.updateFavoriteStatus(id, status).pipe(
+            map((offer: Offer) =>
+              FavoritesActions.updateFavoriteStatusSuccess({ offer, status })
+            ),
+            catchError((error) =>
+              of(FavoritesActions.updateFavoriteStatusFailure({ error }))
+            )
+          );
+        })
+      )
+  );
 }

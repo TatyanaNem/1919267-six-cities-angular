@@ -30,23 +30,25 @@ export const reducer = createReducer(
     isLoading: false,
     error: action.error,
   })),
-  on(FavoritesActions.updateFavoriteStatus, (state, action) => {
-    const updatedFavorites = state.favorites.map((offer: Offer) => {
-      return offer.id === action.id
-        ? { ...offer, isFavorite: action.status }
-        : offer;
+  on(FavoritesActions.updateFavoriteStatusSuccess, (state, action) => {
+    const toBeRemoved = action.status === 0;
+    const { id, isFavorite } = action.offer;
+
+    // Создаем копию массива, обновляя объект с заданным id
+    let updatedFavorites = state.favorites.map((item) => {
+      if (item.id === id) {
+        return { ...item, isFavorite }; // Обновляем только нужный объект
+      }
+      return item;
     });
-    // Если статус становится false, удаляем предложение из избранных
-    if (!action.status) {
-      return {
-        ...state,
-        favorites: updatedFavorites.filter((item) => item.id !== action.id),
-      };
+
+    // Удаляем или добавляем объект в зависимости от статуса
+    if (toBeRemoved) {
+      updatedFavorites = updatedFavorites.filter((item) => item.id !== id);
     } else {
-      return {
-        ...state,
-        favorites: updatedFavorites,
-      };
+      updatedFavorites = [...updatedFavorites, action.offer];
     }
+
+    return { ...state, favorites: updatedFavorites };
   })
 );

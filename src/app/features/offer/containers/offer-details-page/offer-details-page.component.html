@@ -14,7 +14,8 @@
             <h1 class="offer__name">
               {{currentOffer.title}}
             </h1>
-            <app-bookmark-button [block]="'offer'" [size]="'large'" [isFavorite]="currentOffer.isFavorite">
+            <app-bookmark-button [block]="'offer'" [size]="'large'" [isFavorite]="currentOffer.isFavorite"
+              (updateFavoriteStatus)="updateFavoriteStatus($event)">
             </app-bookmark-button>
           </div>
           <div class="offer__rating rating">

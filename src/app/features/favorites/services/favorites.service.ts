@@ -14,4 +14,10 @@ export class FavoritesService {
       .get<Offer[]>(`${BACKEND_URL}${APIRoute.Favorite}`)
       .pipe(timeout(REQUEST_TIMEOUT));
   }
+
+  updateFavoriteStatus(id: string, status: number): Observable<Offer> {
+    return this.http
+      .post<Offer>(`${BACKEND_URL}${APIRoute.Favorite}/${id}/${status}`, {})
+      .pipe(timeout(REQUEST_TIMEOUT));
+  }
 }

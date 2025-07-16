@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { Offer } from '@app/features/offers/models';
-import * as OffersActions from '../actions';
+import * as OffersActions from '../actions/actions';
 import { Cities } from '@app/const';
+import * as FavoritesActions from '@app/features/favorites/favorites-slice';
 
 export interface State {
   isLoading: boolean;
@@ -37,10 +38,12 @@ export const reducer = createReducer(
     isLoading: false,
     error: action.error,
   })),
-  on(OffersActions.updateFavoriteStatus, (state, action) => ({
+  on(FavoritesActions.updateFavoriteStatus, (state, action) => ({
     ...state,
     offers: state.offers.map((offer: Offer) =>
-      offer.id === action.id ? { ...offer, isFavorite: action.status } : offer
+      offer.id === action.id
+        ? { ...offer, isFavorite: !offer.isFavorite }
+        : offer
     ),
   }))
 );

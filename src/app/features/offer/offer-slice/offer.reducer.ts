@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { Offer } from '@app/features/offers/models';
 import * as OfferActions from '../offer-slice/actions';
+import * as FavoritesActions from '@app/features/favorites/favorites-slice';
 
 export interface State {
   isLoading: boolean;
@@ -45,5 +46,16 @@ export const reducer = createReducer(
     ...state,
     isLoading: false,
     error: action.error,
-  }))
+  })),
+  on(FavoritesActions.updateFavoriteStatusSuccess, (state) => {
+    if (!state.activeOffer) return state;
+
+    return {
+      ...state,
+      activeOffer: {
+        ...state.activeOffer,
+        isFavorite: !state.activeOffer.isFavorite,
+      },
+    };
+  })
 );
