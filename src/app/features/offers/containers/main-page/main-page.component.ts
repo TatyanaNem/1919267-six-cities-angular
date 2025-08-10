@@ -10,15 +10,16 @@ import { Offer } from '@app/features/offers/models';
 import { LayoutComponent } from '@app/core/layout';
 import { MainBlockEmptyComponent } from './components/main-block-empty/main-block-empty.component';
 import { MainBlockComponent } from './components/main-block/main-block.component';
-import { MapComponent } from '@app/features/offers/components';
+import { MapComponent } from '@app/shared/components';
 import { Store } from '@ngrx/store';
-import * as OffersActions from '@app/features/offers/offers-slice';
+import * as OffersActions from '@app/features/offers/offers-slice/actions';
 import * as FavoritesActions from '@app/features/favorites/favorites-slice';
 import * as UserActions from '@app/features/user/user-slice/actions';
-import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
+import { filter, Observable, Subscription } from 'rxjs';
 import { AppState } from '@app/store';
 import { TabsComponent } from './components/main-block/components/tabs/tabs.component';
 import {
+  currentCitySelector,
   offersByCitySelector,
   selectIsLoading,
 } from '@app/features/offers/offers-slice';
@@ -41,7 +42,7 @@ import { LoaderComponent } from 'src/app/shared/components/loader/loader.compone
 })
 export class MainPageComponent implements OnInit, OnDestroy {
   public offers$: Observable<Offer[]>;
-  public currentCity$ = new BehaviorSubject<Cities>(Cities.Paris);
+  public currentCity$: Observable<Cities>;
   public cityForMap = CityMap[Cities.Paris];
   public activeOfferId: string | null = null;
   public isAuth$: Observable<AuthorizationStatus>;
@@ -53,6 +54,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.offers$ = this.store.select(offersByCitySelector);
     this.isAuth$ = this.store.select(isAuthSelector);
     this.isLoading$ = this.store.select(selectIsLoading);
+    this.currentCity$ = this.store.select(currentCitySelector);
   }
 
   ngOnInit(): void {
@@ -79,7 +81,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   onChangeCurrentCity(city: Cities) {
     this.store.dispatch(OffersActions.setCurrentCity({ city }));
-    this.currentCity$.next(city);
   }
 
   onChangeActiveId(id: string | null) {

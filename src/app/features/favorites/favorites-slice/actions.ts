@@ -12,5 +12,13 @@ export const getFavoritesFailure = createAction(
 );
 export const updateFavoriteStatus = createAction(
   '[Favorites Page] Update Favorite Status',
-  props<{ status: boolean; id: string }>()
+  props<{ id: string; status: number }>()
+);
+export const updateFavoriteStatusSuccess = createAction(
+  '[Favorites Page] Update Favorite Status Success',
+  props<{ offer: Offer; status: number }>()
+);
+export const updateFavoriteStatusFailure = createAction(
+  '[Favorites Page] Update Favorite Status Failure',
+  props<{ error: string }>()
 );

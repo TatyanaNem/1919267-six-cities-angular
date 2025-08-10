@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as ReviewsActions from './actions';
+import * as ReviewsActions from './actions/actions';
 import { Review } from '../models';
 
 export interface State {
@@ -26,6 +26,20 @@ export const reducer = createReducer(
     reviews: action.reviews,
   })),
   on(ReviewsActions.getReviewsFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+  on(ReviewsActions.sendReview, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(ReviewsActions.sendReviewSuccess, (state, action) => ({
+    ...state,
+    isLoading: false,
+    reviews: [...state.reviews, action.review],
+  })),
+  on(ReviewsActions.sendReviewFailure, (state, action) => ({
     ...state,
     isLoading: false,
     error: action.error,

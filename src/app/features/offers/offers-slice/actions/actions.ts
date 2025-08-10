@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Offer } from '../models/offer';
 import { Cities } from '@app/const';
+import { Offer } from '../../models';
 
 export const getOffers = createAction('[Main Offers Page] Get Offers');
 export const getOffersSuccess = createAction(
@@ -14,8 +14,4 @@ export const getOffersFailure = createAction(
 export const setCurrentCity = createAction(
   '[Main Offers Page] Set Current City',
   props<{ city: Cities }>()
-);
-export const updateFavoriteStatus = createAction(
-  '[Offer] Update Favorite Status',
-  props<{ status: boolean; id: string }>()
 );

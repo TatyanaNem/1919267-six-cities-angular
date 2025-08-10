@@ -50,10 +50,6 @@
       "@app/features/user/user-slice/actions": [
         "./src/app/features/user/user-slice/actions/index.ts"
       ],
-
-      "@app/features/offers/components": [
-        "./src/app/features/offers/components/index.ts"
-      ],
       "@app/features/offers/containers": [
         "./src/app/features/offers/containers/index.ts"
       ],
@@ -65,6 +61,9 @@
       ],
       "@app/features/offers/services": [
         "./src/app/features/offers/services/index.ts"
+      ],
+      "@app/features/offers/offers-slice/actions": [
+        "./src/app/features/offers/offers-slice/actions/index.ts"
       ],
       "@app/features/offers/offers-slice": [
         "./src/app/features/offers/offers-slice/index.ts"
@@ -102,8 +101,11 @@
       "@app/features/reviews/services": [
         "./src/app/features/reviews/services/index.ts"
       ],
-      "@app/features/reviews/reviews-slice": [
-        "./src/app/features/reviews/reviews-slice/index.ts"
+      "@app/features/reviews/reviews-slice/actions": [
+        "./src/app/features/reviews/reviews-slice/actions/index.ts"
+      ],
+      "@app/features/reviews/reviews-slice/selectors": [
+        "./src/app/features/reviews/reviews-slice/selectors/index.ts"
       ]
     }
   },

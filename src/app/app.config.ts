@@ -1,3 +1,4 @@
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import {
   InMemoryScrollingFeature,
@@ -22,6 +23,7 @@ import { ActiveOfferEffects } from './features/offer/offer-slice';
 import { ReviewsEffects } from './features/reviews/reviews-slice';
 import { errorInterceptor, tokenInterceptor } from './core/interceptors';
 import { UserEffects } from './features/user/user-slice/effects';
+import { provideToastr } from 'ngx-toastr';
 
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
@@ -52,7 +54,13 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(
       withFetch(),
-      withInterceptors([tokenInterceptor, errorInterceptor])
+      withInterceptors([errorInterceptor, tokenInterceptor])
     ),
+    provideAnimations(),
+    provideToastr({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
 };
